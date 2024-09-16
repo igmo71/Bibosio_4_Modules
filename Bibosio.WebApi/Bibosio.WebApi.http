@@ -1,0 +1,6 @@
+@Bibosio.WebApi_HostAddress = http://localhost:5262
+
+GET {{Bibosio.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
