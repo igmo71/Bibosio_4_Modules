@@ -1,6 +1,6 @@
 services:
   bibosio.webapi:
-    image: ${DOCKER_REGISTRY-}bibosiowebapi
+    image: ${DOCKER_REGISTRY-}bibosio-webapi
     build:
       context: .
       dockerfile: Bibosio.WebApi/Dockerfile
