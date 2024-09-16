@@ -1,6 +1,57 @@
 services:
   bibosio.webapi:
     image: ${DOCKER_REGISTRY-}bibosio-webapi
+    depends_on: 
+      - postgres
     build:
       context: .
       dockerfile: Bibosio.WebApi/Dockerfile
+
+  postgres:
+    image: postgres
+    hostname: postgres-1
+    container_name: postgres-1
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "bibosio"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "1qaz@WSX"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+  pgadmin:
+    image: dpage/pgadmin4
+    hostname: pgadmin-1
+    container_name: pgadmin-1
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    restart: unless-stopped
+    depends_on: 
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "igmo71@mail.ru"
+      PGADMIN_DEFAULT_PASSWORD: "1qaz@WSX"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+  seq:
+    image: datalust/seq:latest 
+    hostname: seq-1
+    container_name: seq-1
+    ports:
+      - '5341:5341'
+      - '8002:80' 
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+      - DATA_DIR=/data
+volumes:
+  postgres-data:
+    name: postgres-data
+    driver: local
+  pgadmin-data:
+    name: pgadmin-data
+    driver: local
