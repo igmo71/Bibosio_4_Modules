@@ -1,6 +1,7 @@
 ﻿using Bibosio.ProductsModule.Application;
 using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Endpoints;
+using Bibosio.ProductsModule.EventBus.Events;
 using Bibosio.ProductsModule.EventBus.Kafka;
 using Bibosio.ProductsModule.Interfaces;
 using Microsoft.AspNetCore.Routing;
@@ -13,7 +14,7 @@ namespace Bibosio.ProductsModule
     {
         public static IServiceCollection AddProductsModule(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IEventBusProducer<Product>, KafkaProducerService>();
+            services.AddSingleton<IEventBusProducer<ProductCreatedEvent>, KafkaProductCreatedProducer>();
 
             services.AddScoped<IProductCommandServices, ProductCommandServices>();
 

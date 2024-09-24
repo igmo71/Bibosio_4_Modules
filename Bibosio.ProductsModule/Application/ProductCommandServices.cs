@@ -1,4 +1,5 @@
 ﻿using Bibosio.ProductsModule.Domain;
+using Bibosio.ProductsModule.Domain.ValueObjects;
 using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.Interfaces;
 using Serilog;
@@ -18,7 +19,7 @@ namespace Bibosio.ProductsModule.Application
         {
             var id = Guid.CreateVersion7();
 
-            var product = new Product(id) { SKU = new("ABC1234") };
+            var product = new Product(id) { SKU = SKU.From(createProductDto.SKU) };
 
             Log.Debug("{Source} {Id} {@Product}", nameof(CreateProduct), id, product);
 

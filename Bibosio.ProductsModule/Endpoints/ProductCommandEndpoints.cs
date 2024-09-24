@@ -31,16 +31,4 @@ namespace Bibosio.ProductsModule.Endpoints
             return group;
         }
     }
-
-    class ProductCommandHandler
-    {
-        public static async Task<Created> CreateProduct(
-            [FromBody] CreateProductDto createProductDto,
-            [FromServices] IProductCommandServices productCommandService)
-        {
-            var id = await productCommandService.CreateProduct(createProductDto);
-
-            return TypedResults.Created(id.ToString());
-        }
-    }
 }
