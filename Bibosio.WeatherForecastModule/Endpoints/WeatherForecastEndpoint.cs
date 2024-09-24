@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using SerilogTracing;
+using System.Linq;
 
 namespace Bibosio.WeatherForecastModule.Endpoints
 {
@@ -20,24 +22,17 @@ namespace Bibosio.WeatherForecastModule.Endpoints
 
             builder.MapGet("/weatherforecast", (HttpContext httpContext) =>
             {
+                using var activity = Log.Logger.ForContext(typeof(WeatherForecastEndpoint)).StartActivity(nameof(WeatherForecast));
+
                 WeatherForecast[] forecast = GetForecast();
+
+                activity.AddProperty("forecast", forecast);
 
                 Log.ForContext(typeof(WeatherForecastEndpoint)).Debug("{Source} {@WeatherForecast}", nameof(WeatherForecast), forecast);
 
                 return forecast;
             })
             .WithName("GetWeatherForecast");
-
-            builder.MapGet("/weatherforecast2", (HttpContext httpContext, 
-                [FromServices] ILogger<WeatherForecast> logger) =>
-            {
-                WeatherForecast[] forecast = GetForecast();
-
-                logger.LogDebug("ILogger {@WeatherForecast}", forecast);
-
-                return forecast;
-            })
-            .WithName("GetWeatherForecast_2");
 
             return builder;
         }
@@ -56,6 +51,5 @@ namespace Bibosio.WeatherForecastModule.Endpoints
                 .ToArray();
             return forecast;
         }
-
     }
 }

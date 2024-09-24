@@ -42,7 +42,7 @@ services:
     container_name: seq-1
     ports:
       - '5341:5341'
-      - '8001:80' 
+      - '8081:80' 
     volumes:
       - seq-1-data:/data
     restart: unless-stopped
@@ -98,7 +98,7 @@ services:
     hostname: kafka-ui-1
     container_name: kafka-ui-1
     ports:
-      - '8002:8080'
+      - '8082:8080'
     volumes:
       - kafka-ui-1-data:/etc/kafkaui
     restart: unless-stopped

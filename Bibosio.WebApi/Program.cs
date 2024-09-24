@@ -1,6 +1,7 @@
 
 using Bibosio.WeatherForecastModule;
 using Serilog;
+using SerilogTracing;
 
 namespace Bibosio.WebApi
 {
@@ -16,14 +17,20 @@ namespace Bibosio.WebApi
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
-            builder.Services.AddSerilog(options => 
+            builder.Services.AddSerilog(options =>
                 options.ReadFrom.Configuration(builder.Configuration));
-            
+
+            using var _ = new ActivityListenerConfiguration()
+                .Instrument.AspNetCoreRequests()
+                .Instrument.SqlClientCommands()
+                .TraceToSharedLogger();
+
             builder.Services.AddHealthChecks();
 
             var app = builder.Build();
 
-            app.UseSerilogRequestLogging();
+            app.UseSerilogRequestLogging(options =>
+                options.IncludeQueryInRequestPath = true);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -36,7 +43,7 @@ namespace Bibosio.WebApi
             app.UseAuthorization();
 
             app.UseHealthChecks("/healthz");
-            
+
             app.UseWeatherForecastModule();
 
             app.Run();
