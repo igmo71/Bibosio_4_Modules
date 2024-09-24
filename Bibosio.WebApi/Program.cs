@@ -1,4 +1,6 @@
+using Bibosio.ProductsModule;
 using Bibosio.WeatherForecastModule;
+using Bibosio.WeatherForecastModule.Endpoints;
 using Scalar.AspNetCore;
 using Serilog;
 using SerilogTracing;
@@ -27,6 +29,8 @@ namespace Bibosio.WebApi
 
             builder.Services.AddHealthChecks();
 
+            builder.Services.AddProductsModule(builder.Configuration);
+
             var app = builder.Build();
 
             app.UseSerilogRequestLogging(options =>
@@ -46,7 +50,8 @@ namespace Bibosio.WebApi
 
             app.UseHealthChecks("/healthz");
 
-            app.UseWeatherForecastModule();
+            app.MapWeatherForecastEndpoint();
+            app.MapProductModuleEndpoints();
 
             app.Run();
         }

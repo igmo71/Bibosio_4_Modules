@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="EventBus\InMemoryBus\" />
+    <Folder Include="EventBus\Events\" />
     <Folder Include="Infrastructure\Data\Migrations\" />
   </ItemGroup>
 

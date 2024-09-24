@@ -1,7 +1,9 @@
-﻿namespace Bibosio.ProductsModule.Interfaces
+﻿using Bibosio.ProductsModule.Domain;
+
+namespace Bibosio.ProductsModule.Interfaces
 {
-    internal interface IEventBusProducer
+    public interface IEventBusProducer<TMessage>
     {
-        Task SendMessageAsync(string key, string message);
+        Task SendMessageAsync(string key, TMessage message);
     }
 }

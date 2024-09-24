@@ -8,29 +8,32 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Bibosio.ProductsModule.Endpoints
 {
-    public static class ProductEndpoints
+    public static class ProductCommandEndpoints
     {
-        public static RouteGroupBuilder MapProductEndpoints(this RouteGroupBuilder builder)
+        public static IEndpointRouteBuilder MapProductCommandEndpoints(this IEndpointRouteBuilder builder)
         {
             var group = builder.MapGroup("/api/products")
                 .MapProductApi()
-                .WithName("Name - Products")
-                .WithTags("product", "create", "update");
+                .WithName("Products")
+                .WithTags("Products");
 
             return builder;
         }
 
         public static RouteGroupBuilder MapProductApi(this RouteGroupBuilder group)
         {
-            group.MapPost("/", CreateProduct);
-            //group.MapGet("/", GetAllTodos);
-            //group.MapGet("/{id}", GetTodo);
+            group.MapPost("/", ProductCommandHandler.CreateProduct);
             //group.MapPut("/{id}", UpdateTodo);
             //group.MapDelete("/{id}", DeleteTodo);
+            //group.MapGet("/", GetAllTodos);
+            //group.MapGet("/{id}", GetTodo);
 
             return group;
         }
+    }
 
+    class ProductCommandHandler
+    {
         public static async Task<Created> CreateProduct(
             [FromBody] CreateProductDto createProductDto,
             [FromServices] IProductCommandServices productCommandService)

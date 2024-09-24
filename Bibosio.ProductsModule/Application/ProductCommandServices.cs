@@ -1,4 +1,5 @@
-﻿using Bibosio.ProductsModule.Dto;
+﻿using Bibosio.ProductsModule.Domain;
+using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.Interfaces;
 using Serilog;
 
@@ -6,11 +7,22 @@ namespace Bibosio.ProductsModule.Application
 {
     public class ProductCommandServices : IProductCommandServices
     {
+        private readonly IEventBusProducer<Product> _eventBusProducer;
+
+        public ProductCommandServices(IEventBusProducer<Product> eventBusProducer)
+        {
+            _eventBusProducer = eventBusProducer;
+        }
+
         public Task<Guid> CreateProduct(CreateProductDto createProductDto)
         {
             var id = Guid.CreateVersion7();
 
-            Log.Debug("{Source} {Id}", nameof(CreateProduct), id);
+            var product = new Product(id) { SKU = new("ABC1234") };
+
+            Log.Debug("{Source} {Id} {@Product}", nameof(CreateProduct), id, product);
+
+            _eventBusProducer.SendMessageAsync(id.ToString(), product);
 
             return Task.FromResult(id);
         }
