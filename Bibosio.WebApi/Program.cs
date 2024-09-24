@@ -1,4 +1,3 @@
-
 using Bibosio.WeatherForecastModule;
 using Scalar.AspNetCore;
 using Serilog;
@@ -12,12 +11,6 @@ namespace Bibosio.WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddAuthorization();
-
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
             builder.Services.AddSerilog(options =>
                 options.ReadFrom.Configuration(builder.Configuration));
 
@@ -25,6 +18,12 @@ namespace Bibosio.WebApi
                 .Instrument.AspNetCoreRequests()
                 .Instrument.SqlClientCommands()
                 .TraceToSharedLogger();
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddOpenApi();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             builder.Services.AddHealthChecks();
 
@@ -33,11 +32,12 @@ namespace Bibosio.WebApi
             app.UseSerilogRequestLogging(options =>
                 options.IncludeQueryInRequestPath = true);
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapScalarApiReference();
                 app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
