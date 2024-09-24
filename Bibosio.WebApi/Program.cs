@@ -1,5 +1,6 @@
 
 using Bibosio.WeatherForecastModule;
+using Scalar.AspNetCore;
 using Serilog;
 using SerilogTracing;
 
@@ -35,6 +36,7 @@ namespace Bibosio.WebApi
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.MapScalarApiReference();
                 app.MapOpenApi();
             }
 
