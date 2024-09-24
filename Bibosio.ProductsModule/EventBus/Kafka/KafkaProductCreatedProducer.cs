@@ -1,17 +1,22 @@
-﻿using Bibosio.ProductsModule.EventBus.Events;
-using Bibosio.ProductsModule.Interfaces;
+﻿using Bibosio.Interfaces;
+using Bibosio.ProductsModule.EventBus.Events;
 using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Bibosio.ProductsModule.EventBus.Kafka
 {
     internal class KafkaProductCreatedProducer : IEventBusProducer<ProductCreatedEvent>
     {
-        private readonly IProducer<string, ProductCreatedEvent> _producer;
         private readonly string _topic;
+        private readonly IProducer<string, ProductCreatedEvent> _producer;
+        private readonly ILogger<KafkaProductCreatedProducer> _logger;
 
-        public KafkaProductCreatedProducer(IConfiguration configuration)
+        public KafkaProductCreatedProducer(ILogger<KafkaProductCreatedProducer> logger, IConfiguration configuration)
         {
+            _topic = configuration["Kafka:ProductCreatedTopic"]
+                ?? throw new ApplicationException("Kafka ProductCreatedTopic not found");
+
             var config = new ProducerConfig
             {
                 BootstrapServers = configuration["Kafka:BootstrapServers"]
@@ -20,19 +25,21 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
             _producer = new ProducerBuilder<string, ProductCreatedEvent>(config)
                 .SetValueSerializer(new KafkaSerializer<ProductCreatedEvent>())
                 .Build();
-            _topic = configuration["Kafka:Topic"]
-                ?? throw new ApplicationException("Kafka Topic not found");
+
+            _logger = logger;
         }
 
-        public async Task SendMessageAsync(string key, ProductCreatedEvent message)
+        public async Task SendMessageAsync(string key, ProductCreatedEvent createdEvent)
         {
-            var kafkaMessage = new Message<string, ProductCreatedEvent>
+            var createdMessage = new Message<string, ProductCreatedEvent>
             {
                 Key = key,
-                Value = message
+                Value = createdEvent
             };
 
-            await _producer.ProduceAsync(_topic, kafkaMessage);
+            await _producer.ProduceAsync(_topic, createdMessage);
+
+            _logger.LogDebug("{Source} {@CreatedMessage}", nameof(SendMessageAsync), createdMessage);
         }
     }
 }

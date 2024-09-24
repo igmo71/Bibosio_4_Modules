@@ -3,5 +3,5 @@ using Bibosio.ProductsModule.Domain.ValueObjects;
 
 namespace Bibosio.ProductsModule.EventBus.Events
 {
-    public record ProductCreatedEvent(Guid Id, SKU SKU) : IEvent;
+    public record ProductCreatedEvent(Guid Id, string Sku) : IEvent;
 }

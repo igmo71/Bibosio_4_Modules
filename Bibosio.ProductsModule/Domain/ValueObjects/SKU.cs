@@ -2,9 +2,9 @@
 
 namespace Bibosio.ProductsModule.Domain.ValueObjects
 {
-    public record SKU(string Value)
+    public record Sku(string Value)
     {
-        public static SKU From(string? sku) =>
+        public static Sku From(string? sku) =>
             new(sku
                 .AssertNotEmpty()
                 .AssertMatchesRegex("[A-Z]{2,4}[0-9]{4,18}"));

@@ -9,7 +9,7 @@ namespace Bibosio.ProductsModule.Infrastructure.Data.EntityConfigurations
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.OwnsOne(e => e.SKU);
+            builder.OwnsOne(e => e.Sku);
         }
     }
 }

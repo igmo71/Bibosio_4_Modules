@@ -4,6 +4,10 @@ services:
     build:
       context: .
       dockerfile: Bibosio.WebApi/Dockerfile
+    depends_on: 
+      - postgres
+      - kafka-1
+      - kafka-2
 
   postgres:
     image: postgres

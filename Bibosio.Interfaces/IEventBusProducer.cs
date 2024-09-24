@@ -1,6 +1,4 @@
-﻿using Bibosio.ProductsModule.Domain;
-
-namespace Bibosio.ProductsModule.Interfaces
+﻿namespace Bibosio.Interfaces
 {
     public interface IEventBusProducer<TMessage>
     {

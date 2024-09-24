@@ -9,7 +9,7 @@ namespace Bibosio.ProductsModule.Domain
         {
         }
 
-        public required SKU SKU { get; set; }
+        public required Sku Sku { get; set; }
         public List<Option>? ProductOptions { get; set; }
     }
 }

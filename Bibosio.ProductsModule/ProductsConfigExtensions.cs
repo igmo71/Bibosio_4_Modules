@@ -1,5 +1,5 @@
-﻿using Bibosio.ProductsModule.Application;
-using Bibosio.ProductsModule.Domain;
+﻿using Bibosio.Interfaces;
+using Bibosio.ProductsModule.Application;
 using Bibosio.ProductsModule.Endpoints;
 using Bibosio.ProductsModule.EventBus.Events;
 using Bibosio.ProductsModule.EventBus.Kafka;
@@ -14,9 +14,11 @@ namespace Bibosio.ProductsModule
     {
         public static IServiceCollection AddProductsModule(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IProductCommandServices, ProductCommandServices>();
+         
             services.AddSingleton<IEventBusProducer<ProductCreatedEvent>, KafkaProductCreatedProducer>();
 
-            services.AddScoped<IProductCommandServices, ProductCommandServices>();
+            services.AddHostedService<KafkaProductCreatedConsumer>();
 
             return services;
         }

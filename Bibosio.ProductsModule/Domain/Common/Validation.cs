@@ -11,7 +11,7 @@ namespace Bibosio.ProductsModule.Domain.Common
         {
             return !string.IsNullOrWhiteSpace(value) 
                 ? value 
-                : throw new ArgumentOutOfRangeException(argumentName);
+                : throw new ApplicationException(argumentName);
         }
 
         public static string AssertMatchesRegex(this string value, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
@@ -19,7 +19,7 @@ namespace Bibosio.ProductsModule.Domain.Common
         {
             return Regex.IsMatch(value.AssertNotEmpty(), pattern)
                 ? value
-                : throw new ArgumentOutOfRangeException(argumentName);
+                : throw new ApplicationException(argumentName);
         }
     }
 }

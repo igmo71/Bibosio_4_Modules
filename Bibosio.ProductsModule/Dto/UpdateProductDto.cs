@@ -1,4 +1,4 @@
 ﻿namespace Bibosio.ProductsModule.Dto
 {
-    public record UpdateProductDto(Guid Id,string SKU, string Name);
+    public record UpdateProductDto(Guid Id,string Sku, string Name);
 }
