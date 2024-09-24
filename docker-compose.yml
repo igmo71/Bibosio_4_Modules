@@ -1,8 +1,6 @@
 services:
   bibosio.webapi:
     image: ${DOCKER_REGISTRY-}bibosio-webapi
-    depends_on: 
-      - postgres
     build:
       context: .
       dockerfile: Bibosio.WebApi/Dockerfile
@@ -14,13 +12,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-1-data:/var/lib/postgresql/data
     restart: unless-stopped
     environment:
       POSTGRES_DB: "bibosio"
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "1qaz@WSX"
       PGDATA: "/var/lib/postgresql/data/pgdata"
+
   pgadmin:
     image: dpage/pgadmin4
     hostname: pgadmin-1
@@ -28,7 +27,7 @@ services:
     ports:
       - "5050:80"
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
+      - pgadmin-1-data:/var/lib/pgadmin
     restart: unless-stopped
     depends_on: 
       - postgres
@@ -36,22 +35,89 @@ services:
       PGADMIN_DEFAULT_EMAIL: "igmo71@mail.ru"
       PGADMIN_DEFAULT_PASSWORD: "1qaz@WSX"
       PGADMIN_CONFIG_SERVER_MODE: "False"
+
   seq:
     image: datalust/seq:latest 
     hostname: seq-1
     container_name: seq-1
     ports:
       - '5341:5341'
-      - '8002:80' 
+      - '8001:80' 
+    volumes:
+      - seq-1-data:/data
     restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
-      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-      - DATA_DIR=/data
+ 
+  kafka-1:
+    image: bitnami/kafka:latest
+    hostname: kafka-1
+    container_name: kafka-1
+    ports:
+      - "9092"
+    volumes:
+      - kafka-1-data:/bitnami/kafka    
+    restart: unless-stopped
+    environment:
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_KRAFT_CLUSTER_ID: abcdefghijklmnopqrstuv
+      # KAFKA_JMX_PORT: 9997
+      # KAFKA_JMX_HOSTNAME: kafka-1
+      # ALLOW_PLAINTEXT_LISTENER: 'yes'
+      EXTRA_ARGS: "-Xms128m -Xmx256m"
+
+  kafka-2:
+    image: bitnami/kafka:latest
+    hostname: kafka-2
+    container_name: kafka-2
+    ports:
+      - "9092"
+    volumes:
+      - kafka-2-data:/bitnami/kafka    
+    restart: unless-stopped
+    environment:
+      KAFKA_CFG_NODE_ID: 2
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka-1:9093,2@kafka-2:9093
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_KRAFT_CLUSTER_ID: abcdefghijklmnopqrstuv
+      # KAFKA_JMX_PORT: 9997
+      # KAFKA_JMX_HOSTNAME: kafka-2
+      # ALLOW_PLAINTEXT_LISTENER: 'yes'
+      EXTRA_ARGS: "-Xms128m -Xmx256m"
+
+  kafka-ui-1:
+    image: provectuslabs/kafka-ui:latest
+    hostname: kafka-ui-1
+    container_name: kafka-ui-1
+    ports:
+      - '8002:8080'
+    volumes:
+      - kafka-ui-1-data:/etc/kafkaui
+    restart: unless-stopped
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+    depends_on:
+      - kafka-1
+      - kafka-2
+
 volumes:
-  postgres-data:
-    name: postgres-data
+  postgres-1-data:
     driver: local
-  pgadmin-data:
-    name: pgadmin-data
+  pgadmin-1-data:
+    driver: local
+  seq-1-data:
+   driver: local
+  kafka-1-data:
+    driver: local
+  kafka-2-data:
+    driver: local
+  kafka-ui-1-data:
     driver: local

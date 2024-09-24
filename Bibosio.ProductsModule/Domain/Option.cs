@@ -9,5 +9,6 @@ namespace Bibosio.ProductsModule.Domain
         public int Priority { get; set; }
         public bool IsUseShortName { get; set; }
         public bool IsUseValue { get; set; }
+        public List<string>? Values { get; set; } // TODO: Option Values are string?
     }
 }

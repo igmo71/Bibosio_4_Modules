@@ -2,7 +2,7 @@
 
 namespace Bibosio.Common
 {
-    public class AppEntity : IEntity<Guid>
+    public abstract class AppEntity : IEntity<Guid>
     {
         public AppEntity()
         {

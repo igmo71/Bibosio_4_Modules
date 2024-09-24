@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bibosio.Common\Bibosio.Common.csproj" />
     <ProjectReference Include="..\Bibosio.WeatherForecastModule\Bibosio.WeatherForecastModule.csproj" />
   </ItemGroup>
 
