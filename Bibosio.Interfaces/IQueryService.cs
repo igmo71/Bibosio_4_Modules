@@ -1,6 +1,6 @@
 ﻿namespace Bibosio.Interfaces
 {
-    public interface INotification
+    public interface IQueryService
     {
     }
 }

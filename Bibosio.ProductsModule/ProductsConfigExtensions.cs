@@ -22,8 +22,10 @@ namespace Bibosio.ProductsModule
                 options.UseNpgsql(connectionString);
             });
 
-            services.AddScoped<IProductCommandServices, ProductCommandServices>();
-         
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductCommandService, ProductCommandService>();
+            services.AddScoped<IProductQueryService, ProductQueryService>();
+
             services.AddSingleton<IEventBusProducer<ProductCreatedEvent>, KafkaProductCreatedProducer>();
             //services.AddSingleton<IEventBusProducer<ProductUpdatedEvent>, KafkaProductUpdatedProducer>(); // TODO: NotImplemented
 

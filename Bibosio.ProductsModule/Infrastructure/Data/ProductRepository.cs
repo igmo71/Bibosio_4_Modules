@@ -5,11 +5,18 @@ namespace Bibosio.ProductsModule.Infrastructure.Data
 {
     internal class ProductRepository : IProductRepository
     {
+        private readonly ProductsDbContext _dbContext;
 
-
-        public Task<Guid> CreateAsync(Product entity)
+        public ProductRepository(ProductsDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+
+        public async Task<int> CreateAsync(Product entity)
+        {
+            _dbContext.Products.Add(entity);
+            var result = await _dbContext.SaveChangesAsync();
+            return result;
         }
 
         public Task DeleteAsync(Guid id)

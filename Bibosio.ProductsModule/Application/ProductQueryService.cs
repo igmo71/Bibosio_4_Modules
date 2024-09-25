@@ -2,7 +2,7 @@
 
 namespace Bibosio.ProductsModule.Application
 {
-    internal class ProductQueryServices : IProductQueryServices
+    internal class ProductQueryService : IProductQueryService
     {
     }
 }

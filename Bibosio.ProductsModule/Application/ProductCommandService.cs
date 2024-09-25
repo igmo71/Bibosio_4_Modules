@@ -3,24 +3,23 @@ using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Domain.ValueObjects;
 using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.EventBus.Events;
-using Bibosio.ProductsModule.Infrastructure.Data;
 using Bibosio.ProductsModule.Interfaces;
 using Serilog;
 using SerilogTracing;
 
 namespace Bibosio.ProductsModule.Application
 {
-    internal class ProductCommandServices : IProductCommandServices
+    internal class ProductCommandService : IProductCommandService
     {
-        private readonly ProductsDbContext _dbContext;
+        private readonly IProductRepository _repository;
         private readonly IEventBusProducer<ProductCreatedEvent> _eventBusProducer;
         private readonly ILogger _logger;
 
-        public ProductCommandServices(ProductsDbContext dbContext, IEventBusProducer<ProductCreatedEvent> eventBusProducer)
+        public ProductCommandService(IProductRepository repository, IEventBusProducer<ProductCreatedEvent> eventBusProducer)
         {
-            _dbContext = dbContext;
+            _repository = repository;
             _eventBusProducer = eventBusProducer;
-            _logger = Log.ForContext<ProductCommandServices>();
+            _logger = Log.ForContext<ProductCommandService>();
         }
 
         public async Task<Guid> CreateProductAsync(CreateProductDto createProductDto)
@@ -31,8 +30,7 @@ namespace Bibosio.ProductsModule.Application
 
             var product = new Product(id) { Sku = Sku.From(createProductDto.Sku) };
 
-            _dbContext.Products.Add(product);
-            await _dbContext.SaveChangesAsync();
+            _ = await _repository.CreateAsync(product);
 
             await _eventBusProducer.SendMessageAsync(id.ToString(), new ProductCreatedEvent(id, product.Sku.Value));
 

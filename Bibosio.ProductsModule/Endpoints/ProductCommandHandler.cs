@@ -12,7 +12,7 @@ namespace Bibosio.ProductsModule.Endpoints
     {
         public static async Task<Created> CreateProductAsync(
             [FromBody] CreateProductDto createProductDto,
-            [FromServices] IProductCommandServices productCommandService)
+            [FromServices] IProductCommandService productCommandService)
         {
             var id = await productCommandService.CreateProductAsync(createProductDto);
 
@@ -22,14 +22,14 @@ namespace Bibosio.ProductsModule.Endpoints
         internal static async Task UpdateProductAsync(
             [FromQuery] string id,
             [FromBody] UpdateProductDto updateProductDto,
-            [FromServices] IProductCommandServices productCommandService)
+            [FromServices] IProductCommandService productCommandService)
         {
             throw new NotImplementedException();
         }
 
         internal static async Task DeleteProductAsync(
             [FromQuery] string id,
-            [FromServices] IProductCommandServices productCommandService)
+            [FromServices] IProductCommandService productCommandService)
         {
             throw new NotImplementedException();
         }
