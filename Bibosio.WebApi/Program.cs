@@ -37,7 +37,7 @@ namespace Bibosio.WebApi
                 app.MapOpenApi();
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                //app.MapScalarApiReference();
+                app.MapScalarApiReference();
             }
 
             //app.UseSerilogRequestLogging(options => options.IncludeQueryInRequestPath = true);

@@ -1,6 +1,5 @@
-﻿using Bibosio.ProductsModule.Domain;
+﻿using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.Interfaces;
-using System.Collections.Immutable;
 
 namespace Bibosio.ProductsModule.Application
 {
@@ -13,15 +12,25 @@ namespace Bibosio.ProductsModule.Application
             _repository = repository;
         }
 
-        public ImmutableList<Product> GetProducts(int? skip = 0, int? top = 100)
+        public async Task<ProductVm[]> GetProductsAsync(int skip, int top)
         {
-            var result = _repository.GetAll((int)skip!, (int)top!);
+            var products = await _repository.GetAllAsync(skip, top);
+
+            var result = products.Select(e => ProductVm.From(e)).ToArray();
+
             return result;
         }
 
-        public Task<Product> GetProductAsync()
+        public async Task<ProductVm?> GetProductAsync(string id)
         {
-            throw new NotImplementedException();
+            var product = await _repository.GetByIdAsync(Guid.Parse(id));
+
+            if (product == null)
+                return null;
+
+            var result = ProductVm.From(product);
+
+            return result;
         }
     }
 }

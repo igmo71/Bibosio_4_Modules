@@ -39,9 +39,20 @@ namespace Bibosio.ProductsModule.Application
             return id;
         }
 
-        public Task UpdateProduct(UpdateProductDto updateProductDto)
+        public async Task UpdateProductAsync(UpdateProductDto updateProductDto)
         {
-            throw new NotImplementedException();
+            using var activity = _logger.StartActivity(nameof(UpdateProductAsync));
+
+            var product = new Product(updateProductDto.Id) { Sku = Sku.From(updateProductDto.Sku) };
+
+            _ = await _repository.UpdateAsync(product);
+
+            _logger.Debug("{Source} - Ok {Id} {@Product}", nameof(UpdateProductAsync), product.Id, product);
+        }
+
+        public async Task DeleteProductAsync(string id)
+        {
+            await _repository.DeleteAsync(Guid.Parse(id));
         }
     }
 }

@@ -14,10 +14,10 @@ namespace Bibosio.ProductsModule.Endpoints
             group.MapPost("/", ProductCommandHandler.CreateProductAsync)
                 .WithName("CreateProduct");
 
-            group.MapPut("/{id}", ProductCommandHandler.UpdateProductAsync) // TODO: NotImplemented
+            group.MapPut("/", ProductCommandHandler.UpdateProductAsync)
                 .WithName("UpdateProduct");
 
-            group.MapDelete("/{id}", ProductCommandHandler.DeleteProductAsync) // TODO: NotImplemented
+            group.MapDelete("/{id}", ProductCommandHandler.DeleteProductAsync)
                 .WithName("DeleteProduct");
 
             return builder;

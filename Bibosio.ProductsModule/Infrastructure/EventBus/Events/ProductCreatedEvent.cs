@@ -1,5 +1,4 @@
 ﻿using Bibosio.Interfaces;
-using Bibosio.ProductsModule.Domain.ValueObjects;
 
 namespace Bibosio.ProductsModule.Infrastructure.EventBus.Events
 {

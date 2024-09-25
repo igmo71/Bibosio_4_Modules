@@ -3,8 +3,6 @@ using Bibosio.ProductsModule.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
-using SerilogTracing;
 
 namespace Bibosio.ProductsModule.Endpoints
 {
@@ -19,19 +17,22 @@ namespace Bibosio.ProductsModule.Endpoints
             return TypedResults.Created(id.ToString());
         }
 
-        internal static async Task UpdateProductAsync(
-            [FromQuery] string id,
+        internal static async Task<NoContent> UpdateProductAsync(
             [FromBody] UpdateProductDto updateProductDto,
             [FromServices] IProductCommandService productCommandService)
         {
-            throw new NotImplementedException();
+            await productCommandService.UpdateProductAsync(updateProductDto);
+
+            return TypedResults.NoContent();
         }
 
-        internal static async Task DeleteProductAsync(
+        internal static async Task<NoContent> DeleteProductAsync(
             [FromQuery] string id,
             [FromServices] IProductCommandService productCommandService)
         {
-            throw new NotImplementedException();
+            await productCommandService.DeleteProductAsync(id);
+
+            return TypedResults.NoContent();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Immutable;
 
 namespace Bibosio.ProductsModule.Infrastructure.Data
 {
@@ -21,29 +20,37 @@ namespace Bibosio.ProductsModule.Infrastructure.Data
             return result;
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task<int> UpdateAsync(Product entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Products.Update(entity);
+            var result = await _dbContext.SaveChangesAsync();
+            return result;
         }
 
-        public ImmutableList<Product> GetAll(int skip, int take)
+        public async Task<int> DeleteAsync(Guid id)
+        {
+            var result = await _dbContext.Products
+                .Where(e => e.Id == id)
+                .ExecuteDeleteAsync();
+            return result;    
+        }
+
+        public Task<Product[]> GetAllAsync(int skip, int take)
         {
             var result = _dbContext.Products
                 .AsNoTracking()
                 .Skip(skip)
                 .Take(take)
-                .ToImmutableList();
+                .ToArrayAsync();
             return result;
         }
 
-        public Task<Product> GetByIdAsync(Guid id)
+        public async Task<Product?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Guid id, Product entity)
-        {
-            throw new NotImplementedException();
+            var result = await _dbContext.Products
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.Id == id);
+            return result;
         }
     }
 }

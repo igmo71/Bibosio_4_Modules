@@ -1,6 +1,9 @@
-﻿using Bibosio.ProductsModule.Interfaces;
+﻿using Bibosio.ProductsModule.Domain;
+using Bibosio.ProductsModule.Dto;
+using Bibosio.ProductsModule.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
@@ -13,11 +16,26 @@ namespace Bibosio.ProductsModule.Endpoints
             var group = builder.MapGroup("/api/product")
             .WithTags("Products");
 
-            group.MapGet("/", ([FromQuery] int? skip, [FromQuery] int? top, [FromServices] IProductQueryService productQueryService) =>
-            ProductQueryHandler.GetAllProducts(skip, top, productQueryService))
-                .WithName("GetAllProducts");
+            group.MapGet("/", async Task<Ok<ProductVm[]>> (
+                [FromServices] IProductQueryService productQueryService,
+                [FromQuery] int skip = 0,
+                [FromQuery] int top = 100) =>
+            {
+                var result = await productQueryService.GetProductsAsync(skip, top);
 
-            group.MapGet("/{id}", ProductQueryHandler.GetProductAsync) // TODO: NotImplemented
+                return TypedResults.Ok(result);
+            }).WithName("GetAllProducts");
+
+            group.MapGet("/{id}", async Task<Results<Ok<ProductVm>, NotFound>> (
+                [FromServices] IProductQueryService productQueryService,
+                [FromRoute] string id) =>
+            {
+                var result = await productQueryService.GetProductAsync(id);
+
+                return result == null
+                    ? TypedResults.NotFound()
+                    : TypedResults.Ok(result);
+            })
                 .WithName("GetProduct");
 
             return builder;
