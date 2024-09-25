@@ -39,7 +39,7 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
 
             await _producer.ProduceAsync(_topic, createdMessage);
 
-            _logger.LogDebug("{Source} {@CreatedMessage}", nameof(SendMessageAsync), createdMessage);
+            _logger.LogDebug("{Source} {@CreatedEvent}", nameof(SendMessageAsync), createdEvent);
         }
     }
 }

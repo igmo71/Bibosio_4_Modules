@@ -6,7 +6,7 @@
     <DockerPublishLocally>False</DockerPublishLocally>
     <ProjectGuid>ff4aff93-5569-4e1f-b82a-8ec8bde2003d</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/healthz</DockerServiceUrl>
     <DockerServiceName>bibosio.webapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

@@ -1,5 +1,4 @@
 using Bibosio.ProductsModule;
-using Bibosio.WeatherForecastModule;
 using Bibosio.WeatherForecastModule.Endpoints;
 using Scalar.AspNetCore;
 using Serilog;
@@ -33,8 +32,7 @@ namespace Bibosio.WebApi
 
             var app = builder.Build();
 
-            app.UseSerilogRequestLogging(options =>
-                options.IncludeQueryInRequestPath = true);
+            app.UseSerilogRequestLogging(options => options.IncludeQueryInRequestPath = true);
 
             if (app.Environment.IsDevelopment())
             {

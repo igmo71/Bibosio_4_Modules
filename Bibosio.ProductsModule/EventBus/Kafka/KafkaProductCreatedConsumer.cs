@@ -32,43 +32,31 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
             _logger = logger;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken сancellationToken)
         {
-            _logger.LogDebug("ConsumeMessage - Start");
-
             _consumer.Subscribe(_topic);
 
             try
             {
-                while (!stoppingToken.IsCancellationRequested)
+                Task.Run(() =>
                 {
-                    var consumeResult = _consumer.Consume(1000);
-
-                    if (consumeResult != null)
+                    while (!сancellationToken.IsCancellationRequested)
                     {
-                        _logger.LogDebug("ConsumeMessage {@MessageValue}", consumeResult.Message.Value);
-                    }
+                        var consumeResult = _consumer.Consume(сancellationToken);
 
-                    await Task.Delay(2000, stoppingToken);
-                }
-            }
-            catch (ConsumeException ex)
-            {
-                _logger.LogError(ex, "ConsumeMessage - ConsumeException {Message}", ex.Message);
-            }
-            catch(OperationCanceledException ex)
-            {
-                _logger.LogError(ex, "ConsumeMessage - OperationCanceledException {Message}", ex.Message);
+                        if (consumeResult != null)
+                        {
+                            _logger.LogDebug("ConsumeMessage {@MessageValue}", consumeResult.Message.Value);
+                        }
+                    }
+                }, сancellationToken);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "ConsumeMessage - Exception {Message}", ex.Message);
-                //throw;
             }
-            finally
-            {
-                _consumer.Close();
-            }
+
+            return Task.CompletedTask;
         }
 
         public override void Dispose()

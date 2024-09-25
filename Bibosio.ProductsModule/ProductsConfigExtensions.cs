@@ -17,8 +17,11 @@ namespace Bibosio.ProductsModule
             services.AddScoped<IProductCommandServices, ProductCommandServices>();
          
             services.AddSingleton<IEventBusProducer<ProductCreatedEvent>, KafkaProductCreatedProducer>();
+            //services.AddSingleton<IEventBusProducer<ProductUpdatedEvent>, KafkaProductUpdatedProducer>();
+
 
             services.AddHostedService<KafkaProductCreatedConsumer>();
+            //services.AddHostedService<KafkaProductUpdatedConsumer>();
 
             return services;
         }
