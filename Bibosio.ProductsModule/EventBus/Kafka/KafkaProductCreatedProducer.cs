@@ -2,7 +2,7 @@
 using Bibosio.ProductsModule.EventBus.Events;
 using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Bibosio.ProductsModule.EventBus.Kafka
 {
@@ -10,9 +10,9 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
     {
         private readonly string _topic;
         private readonly IProducer<string, ProductCreatedEvent> _producer;
-        private readonly ILogger<KafkaProductCreatedProducer> _logger;
+        private readonly ILogger _logger;
 
-        public KafkaProductCreatedProducer(ILogger<KafkaProductCreatedProducer> logger, IConfiguration configuration)
+        public KafkaProductCreatedProducer(IConfiguration configuration)
         {
             _topic = configuration["Kafka:ProductCreatedTopic"]
                 ?? throw new ApplicationException("Kafka ProductCreatedTopic not found");
@@ -26,20 +26,27 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
                 .SetValueSerializer(new KafkaSerializer<ProductCreatedEvent>())
                 .Build();
 
-            _logger = logger;
+            _logger = Log.ForContext<KafkaProductCreatedProducer>();
         }
 
         public async Task SendMessageAsync(string key, ProductCreatedEvent createdEvent)
         {
-            var createdMessage = new Message<string, ProductCreatedEvent>
+            try
             {
-                Key = key,
-                Value = createdEvent
-            };
+                var createdMessage = new Message<string, ProductCreatedEvent>
+                {
+                    Key = key,
+                    Value = createdEvent
+                };
 
-            await _producer.ProduceAsync(_topic, createdMessage);
+                await _producer.ProduceAsync(_topic, createdMessage);
 
-            _logger.LogDebug("{Source} {@CreatedEvent}", nameof(SendMessageAsync), createdEvent);
+                _logger.Debug("{Source} - Ok {@CreatedEvent}", nameof(SendMessageAsync), createdEvent);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "{Source} - Exception {Message}", "ConsumeMessage", ex.Message);
+            }
         }
     }
 }

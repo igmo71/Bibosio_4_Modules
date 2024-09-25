@@ -3,7 +3,7 @@ using Bibosio.ProductsModule.Domain.ValueObjects;
 
 namespace Bibosio.ProductsModule.Domain
 {
-    public class Product : AppEntity
+    internal class Product : AppEntity
     {
         public Product(Guid id) : base(id)
         {

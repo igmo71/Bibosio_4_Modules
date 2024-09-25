@@ -2,9 +2,9 @@
 
 namespace Bibosio.ProductsModule.Interfaces
 {
-    public interface IProductCommandServices
+    internal interface IProductCommandServices
     {
-        Task<Guid> CreateProduct(CreateProductDto createProductDto);
+        Task<Guid> CreateProductAsync(CreateProductDto createProductDto);
         Task UpdateProduct(UpdateProductDto updateProductDto);
     }
 }

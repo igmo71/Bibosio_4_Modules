@@ -3,31 +3,42 @@ using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Domain.ValueObjects;
 using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.EventBus.Events;
+using Bibosio.ProductsModule.Infrastructure.Data;
 using Bibosio.ProductsModule.Interfaces;
 using Serilog;
+using SerilogTracing;
 
 namespace Bibosio.ProductsModule.Application
 {
-    public class ProductCommandServices : IProductCommandServices
+    internal class ProductCommandServices : IProductCommandServices
     {
+        private readonly ProductsDbContext _dbContext;
         private readonly IEventBusProducer<ProductCreatedEvent> _eventBusProducer;
+        private readonly ILogger _logger;
 
-        public ProductCommandServices(IEventBusProducer<ProductCreatedEvent> eventBusProducer)
+        public ProductCommandServices(ProductsDbContext dbContext, IEventBusProducer<ProductCreatedEvent> eventBusProducer)
         {
+            _dbContext = dbContext;
             _eventBusProducer = eventBusProducer;
+            _logger = Log.ForContext<ProductCommandServices>();
         }
 
-        public Task<Guid> CreateProduct(CreateProductDto createProductDto)
+        public async Task<Guid> CreateProductAsync(CreateProductDto createProductDto)
         {
+            using var activity = _logger.StartActivity(nameof(CreateProductAsync));
+
             var id = Guid.CreateVersion7();
 
             var product = new Product(id) { Sku = Sku.From(createProductDto.Sku) };
 
-            Log.ForContext<ProductCommandServices>().Debug("{Source} {Id} {@Product}", nameof(CreateProduct), id, product);
+            _dbContext.Products.Add(product);
+            await _dbContext.SaveChangesAsync();
 
-            _eventBusProducer.SendMessageAsync(id.ToString(), new ProductCreatedEvent(id, product.Sku.Value));
+            await _eventBusProducer.SendMessageAsync(id.ToString(), new ProductCreatedEvent(id, product.Sku.Value));
 
-            return Task.FromResult(id);
+            _logger.Debug("{Source} - Ok {Id} {@Product}", nameof(CreateProductAsync), id, product);
+
+            return id;
         }
 
         public Task UpdateProduct(UpdateProductDto updateProductDto)

@@ -2,7 +2,7 @@
 using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Bibosio.ProductsModule.EventBus.Kafka
 {
@@ -10,9 +10,9 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
     {
         private readonly string _topic;
         private readonly IConsumer<string, ProductCreatedEvent> _consumer;
-        private readonly ILogger<KafkaProductCreatedConsumer> _logger;
+        private readonly ILogger _logger;
 
-        public KafkaProductCreatedConsumer(IConfiguration configuration, ILogger<KafkaProductCreatedConsumer> logger)
+        public KafkaProductCreatedConsumer(IConfiguration configuration)
         {
             _topic = configuration["Kafka:ProductCreatedTopic"]
                 ?? throw new ApplicationException("Kafka ProductCreatedTopic not found");
@@ -29,7 +29,7 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
                 .SetValueDeserializer(new KafkaDeserializer<ProductCreatedEvent>())
                 .Build();
 
-            _logger = logger;
+            _logger = Log.ForContext<KafkaProductCreatedConsumer>();
         }
 
         protected override Task ExecuteAsync(CancellationToken сancellationToken)
@@ -46,14 +46,14 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
 
                         if (consumeResult != null)
                         {
-                            _logger.LogDebug("ConsumeMessage {@MessageValue}", consumeResult.Message.Value);
+                            _logger.Debug("{Source} - Ok {@MessageValue}", "ConsumeMessage", consumeResult.Message.Value);
                         }
                     }
                 }, сancellationToken);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "ConsumeMessage - Exception {Message}", ex.Message);
+                _logger.Error(ex, "{Source} - Exception {Message}", "ConsumeMessage", ex.Message);
             }
 
             return Task.CompletedTask;

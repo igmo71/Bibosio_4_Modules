@@ -1,32 +1,28 @@
-﻿using Bibosio.ProductsModule.Dto;
-using Bibosio.ProductsModule.Interfaces;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Bibosio.ProductsModule.Endpoints
 {
-    public static class ProductCommandEndpoints
+    internal static class ProductCommandEndpoints
     {
-        public static IEndpointRouteBuilder MapProductCommandEndpoints(this IEndpointRouteBuilder builder)
+        internal static IEndpointRouteBuilder MapProductCommandEndpoints(this IEndpointRouteBuilder builder)
         {
             var group = builder.MapGroup("/api/products")
-                .MapProductApi()
-                .WithName("Products")
+                .MapCommandEndpoints()
                 .WithTags("Products");
 
             return builder;
         }
 
-        public static RouteGroupBuilder MapProductApi(this RouteGroupBuilder group)
+        private static RouteGroupBuilder MapCommandEndpoints(this RouteGroupBuilder group)
         {
-            group.MapPost("/", ProductCommandHandler.CreateProduct);
-            //group.MapPut("/{id}", UpdateTodo);
-            //group.MapDelete("/{id}", DeleteTodo);
-            //group.MapGet("/", GetAllTodos);
-            //group.MapGet("/{id}", GetTodo);
+            group.MapPost("/", ProductCommandHandler.CreateProductAsync)
+                .WithName("CreateProduct");
+            group.MapPut("/{id}", ProductCommandHandler.UpdateProductAsync)
+                .WithName("UpdateProduct");
+            group.MapDelete("/{id}", ProductCommandHandler.DeleteProductAsync)
+                .WithName("DeleteProduct");            
 
             return group;
         }

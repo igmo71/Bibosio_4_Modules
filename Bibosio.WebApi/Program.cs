@@ -32,15 +32,15 @@ namespace Bibosio.WebApi
 
             var app = builder.Build();
 
-            app.UseSerilogRequestLogging(options => options.IncludeQueryInRequestPath = true);
-
             if (app.Environment.IsDevelopment())
             {
-                app.MapScalarApiReference();
                 app.MapOpenApi();
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.MapScalarApiReference();
             }
+
+            //app.UseSerilogRequestLogging(options => options.IncludeQueryInRequestPath = true);
 
             app.UseHttpsRedirection();
 
