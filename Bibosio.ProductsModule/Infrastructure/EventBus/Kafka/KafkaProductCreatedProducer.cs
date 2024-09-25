@@ -45,7 +45,7 @@ namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "{Source} - Exception {Message}", "ConsumeMessage", ex.Message);
+                _logger.Error(ex, "{Source} - Exception {Message}", nameof(SendMessageAsync), ex.Message);
             }
         }
     }

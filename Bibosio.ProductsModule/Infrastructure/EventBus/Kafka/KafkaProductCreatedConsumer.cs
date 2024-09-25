@@ -32,7 +32,7 @@ namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
             _logger = Log.ForContext<KafkaProductCreatedConsumer>();
         }
 
-        protected override Task ExecuteAsync(CancellationToken сancellationToken)
+        protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
             _consumer.Subscribe(_topic);
 
@@ -40,16 +40,16 @@ namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
             {
                 Task.Run(() =>
                 {
-                    while (!сancellationToken.IsCancellationRequested)
+                    while (!cancellationToken.IsCancellationRequested)
                     {
-                        var consumeResult = _consumer.Consume(сancellationToken);
+                        var consumeResult = _consumer.Consume(cancellationToken);
 
                         if (consumeResult != null)
                         {
                             _logger.Debug("{Source} - Ok {@MessageValue}", "ConsumeMessage", consumeResult.Message.Value);
                         }
                     }
-                }, сancellationToken);
+                }, cancellationToken);
             }
             catch (Exception ex)
             {

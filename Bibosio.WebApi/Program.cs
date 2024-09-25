@@ -1,3 +1,4 @@
+using Bibosio.Common;
 using Bibosio.ProductsModule;
 using Bibosio.WeatherForecastModule.Endpoints;
 using Scalar.AspNetCore;
@@ -19,14 +20,20 @@ namespace Bibosio.WebApi
                 .Instrument.AspNetCoreRequests()
                 .Instrument.SqlClientCommands()
                 .TraceToSharedLogger();
+
             builder.Services.AddAuthorization();
 
             builder.Services.AddOpenApi();
 
             builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddHealthChecks();
+
+            builder.Services.AddProblemDetails();
+
+            builder.Services.AddExceptionHandler<AppExceptionHandler>();
 
             builder.Services.AddProductsModule(builder.Configuration);
 
@@ -41,6 +48,8 @@ namespace Bibosio.WebApi
             }
 
             //app.UseSerilogRequestLogging(options => options.IncludeQueryInRequestPath = true);
+
+            app.UseExceptionHandler();
 
             app.UseHttpsRedirection();
 

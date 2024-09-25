@@ -16,13 +16,12 @@ namespace Bibosio.ProductsModule.Endpoints
             var group = builder.MapGroup("/api/product")
             .WithTags("Products");
 
-            group.MapGet("/", async Task<Ok<ProductVm[]>> (
+            group.MapGet("/", async Task<Results<Ok<ProductVm[]>, ProblemHttpResult>> (
                 [FromServices] IProductQueryService productQueryService,
                 [FromQuery] int skip = 0,
                 [FromQuery] int top = 100) =>
             {
                 var result = await productQueryService.GetProductsAsync(skip, top);
-
                 return TypedResults.Ok(result);
             }).WithName("GetAllProducts");
 
@@ -31,7 +30,6 @@ namespace Bibosio.ProductsModule.Endpoints
                 [FromRoute] string id) =>
             {
                 var result = await productQueryService.GetProductAsync(id);
-
                 return result == null
                     ? TypedResults.NotFound()
                     : TypedResults.Ok(result);

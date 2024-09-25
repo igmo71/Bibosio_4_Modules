@@ -1,12 +1,9 @@
 ﻿using Bibosio.WeatherForecastModule.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using SerilogTracing;
-using System.Linq;
 
 namespace Bibosio.WeatherForecastModule.Endpoints
 {
