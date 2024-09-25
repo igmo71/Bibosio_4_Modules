@@ -1,5 +1,7 @@
 ﻿using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
 
 namespace Bibosio.ProductsModule.Infrastructure.Data
 {
@@ -20,6 +22,21 @@ namespace Bibosio.ProductsModule.Infrastructure.Data
         }
 
         public Task DeleteAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ImmutableList<Product> GetAll(int skip, int take)
+        {
+            var result = _dbContext.Products
+                .AsNoTracking()
+                .Skip(skip)
+                .Take(take)
+                .ToImmutableList();
+            return result;
+        }
+
+        public Task<Product> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }

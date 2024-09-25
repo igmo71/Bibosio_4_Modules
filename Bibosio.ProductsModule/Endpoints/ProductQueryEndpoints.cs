@@ -1,29 +1,26 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Bibosio.ProductsModule.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Bibosio.ProductsModule.Endpoints
 {
-    internal static class ProductQueryEndpoints
+    public static class ProductQueryEndpoints
     {
         public static IEndpointRouteBuilder MapProductQueryEndpoints(this IEndpointRouteBuilder builder)
         {
-            var group = builder.MapGroup("/api/products")
-                .MapQueryEndpoints()
-                .WithName("Products")
-                .WithTags("Products");
+            var group = builder.MapGroup("/api/product")
+            .WithTags("Products");
 
-            return builder;
-        }
-
-        private static RouteGroupBuilder MapQueryEndpoints(this RouteGroupBuilder group)
-        {            
-            group.MapGet("/", ProductQueryHandler.GetAllProductsAsync)
+            group.MapGet("/", ([FromQuery] int? skip, [FromQuery] int? top, [FromServices] IProductQueryService productQueryService) =>
+            ProductQueryHandler.GetAllProducts(skip, top, productQueryService))
                 .WithName("GetAllProducts");
-            group.MapGet("/{id}", ProductQueryHandler.GetProductAsync)
+
+            group.MapGet("/{id}", ProductQueryHandler.GetProductAsync) // TODO: NotImplemented
                 .WithName("GetProduct");
 
-            return group;
+            return builder;
         }
     }
 }

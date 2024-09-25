@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Bibosio.ProductsModule.Domain;
+using Bibosio.ProductsModule.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
+using System.Collections.Immutable;
 
 namespace Bibosio.ProductsModule.Endpoints
 {
     internal class ProductQueryHandler
     {
-        internal static async Task GetAllProductsAsync(HttpContext context)
+        internal static Ok<ImmutableList<Product>> GetAllProducts(int? skip, int? top, IProductQueryService productQueryService)
         {
-            throw new NotImplementedException();
+            ImmutableList<Product> result = productQueryService.GetProducts(skip, top);
+            return TypedResults.Ok(result);
         }
 
-        internal static async Task GetProductAsync(string id)
+        internal static Product GetProductAsync(string id)
         {
             throw new NotImplementedException();
         }

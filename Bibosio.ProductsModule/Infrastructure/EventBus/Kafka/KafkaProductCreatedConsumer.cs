@@ -1,10 +1,10 @@
-﻿using Bibosio.ProductsModule.EventBus.Events;
+﻿using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
 using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace Bibosio.ProductsModule.EventBus.Kafka
+namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
 {
     internal class KafkaProductCreatedConsumer : BackgroundService
     {
@@ -26,7 +26,7 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
             };
 
             _consumer = new ConsumerBuilder<string, ProductCreatedEvent>(config)
-                .SetValueDeserializer(new KafkaDeserializer<ProductCreatedEvent>())
+                .SetValueDeserializer(new KafkaValueDeserializer<ProductCreatedEvent>())
                 .Build();
 
             _logger = Log.ForContext<KafkaProductCreatedConsumer>();

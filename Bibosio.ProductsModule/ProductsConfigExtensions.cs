@@ -1,9 +1,9 @@
 ﻿using Bibosio.Interfaces;
 using Bibosio.ProductsModule.Application;
 using Bibosio.ProductsModule.Endpoints;
-using Bibosio.ProductsModule.EventBus.Events;
-using Bibosio.ProductsModule.EventBus.Kafka;
 using Bibosio.ProductsModule.Infrastructure.Data;
+using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
+using Bibosio.ProductsModule.Infrastructure.EventBus.Kafka;
 using Bibosio.ProductsModule.Interfaces;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;

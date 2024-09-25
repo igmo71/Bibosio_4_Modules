@@ -2,7 +2,7 @@
 using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Domain.ValueObjects;
 using Bibosio.ProductsModule.Dto;
-using Bibosio.ProductsModule.EventBus.Events;
+using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
 using Bibosio.ProductsModule.Interfaces;
 using Serilog;
 using SerilogTracing;

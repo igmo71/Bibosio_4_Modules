@@ -2,9 +2,9 @@
 using System.Text;
 using System.Text.Json;
 
-namespace Bibosio.ProductsModule.EventBus.Kafka
+namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
 {
-    internal class KafkaSerializer<T> : ISerializer<T>
+    internal class KafkaValueSerializer<T> : ISerializer<T>
     {
         public byte[] Serialize(T data, SerializationContext context)
         {

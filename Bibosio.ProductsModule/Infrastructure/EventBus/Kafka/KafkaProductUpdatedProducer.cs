@@ -1,7 +1,7 @@
 ﻿using Bibosio.Interfaces;
-using Bibosio.ProductsModule.EventBus.Events;
+using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
 
-namespace Bibosio.ProductsModule.EventBus.Kafka
+namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
 {
     internal class KafkaProductUpdatedProducer : IEventBusProducer<ProductUpdatedEvent>
     {

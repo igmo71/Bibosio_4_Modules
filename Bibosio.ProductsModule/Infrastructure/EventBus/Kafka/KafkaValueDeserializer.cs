@@ -1,9 +1,9 @@
 ﻿using Confluent.Kafka;
 using System.Text.Json;
 
-namespace Bibosio.ProductsModule.EventBus.Kafka
+namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
 {
-    internal class KafkaDeserializer<T> : IDeserializer<T>
+    internal class KafkaValueDeserializer<T> : IDeserializer<T>
     {
         public T Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
         {

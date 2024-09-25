@@ -1,10 +1,10 @@
 ﻿using Bibosio.Interfaces;
-using Bibosio.ProductsModule.EventBus.Events;
+using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
 using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 
-namespace Bibosio.ProductsModule.EventBus.Kafka
+namespace Bibosio.ProductsModule.Infrastructure.EventBus.Kafka
 {
     internal class KafkaProductCreatedProducer : IEventBusProducer<ProductCreatedEvent>
     {
@@ -23,7 +23,7 @@ namespace Bibosio.ProductsModule.EventBus.Kafka
             };
 
             _producer = new ProducerBuilder<string, ProductCreatedEvent>(config)
-                .SetValueSerializer(new KafkaSerializer<ProductCreatedEvent>())
+                .SetValueSerializer(new KafkaValueSerializer<ProductCreatedEvent>())
                 .Build();
 
             _logger = Log.ForContext<KafkaProductCreatedProducer>();
