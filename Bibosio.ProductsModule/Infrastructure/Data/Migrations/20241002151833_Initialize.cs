@@ -5,7 +5,7 @@
 namespace Bibosio.ProductsModule.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialize_Products : Migration
+    public partial class Initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

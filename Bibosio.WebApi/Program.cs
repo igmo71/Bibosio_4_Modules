@@ -1,4 +1,4 @@
-using Bibosio.Common;
+using Bibosio.Common.Exceptions;
 using Bibosio.ProductsModule;
 using Bibosio.WeatherForecastModule.Endpoints;
 using Scalar.AspNetCore;
@@ -26,14 +26,15 @@ namespace Bibosio.WebApi
             builder.Services.AddOpenApi();
 
             builder.Services.AddEndpointsApiExplorer();
-
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddHealthChecks();
 
             builder.Services.AddProblemDetails();
-
             builder.Services.AddExceptionHandler<AppExceptionHandler>();
+            builder.Services.AddExceptionHandler<BadRequestExceptionHandler>();
+            builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
+            builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 
             builder.Services.AddProductsModule(builder.Configuration);
 

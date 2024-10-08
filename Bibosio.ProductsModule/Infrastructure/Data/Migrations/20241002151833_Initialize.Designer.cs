@@ -11,15 +11,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Bibosio.ProductsModule.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20240925101304_Initialize_Products")]
-    partial class Initialize_Products
+    [Migration("20241002151833_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("product")
+                .HasDefaultSchema("catalog")
                 .HasAnnotation("ProductVersion", "9.0.0-rc.1.24451.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 

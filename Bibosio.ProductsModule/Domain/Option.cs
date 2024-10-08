@@ -2,13 +2,19 @@
 
 namespace Bibosio.ProductsModule.Domain
 {
-    public class Option : AppEntity
+    internal class Option(Guid id) : AppEntity(id)
     {
-        public required string Name { get; set; }
-        public required string ShortName { get; set; }
-        public int Priority { get; set; }
-        public bool IsUseShortName { get; set; }
-        public bool IsUseValue { get; set; }
-        public List<string>? Values { get; set; } // TODO: Option Values are string?
+        internal required string Name { get; set; }
+
+        /// <summary>
+        /// Is use OptionValue in Product Name
+        /// If 0 do not use in Product Name
+        /// </summary>
+        internal int PriorityInProductName { get; set; }
+
+        internal Guid CategoryId { get; set; }
+        internal Category? Category { get; set; }
+
+        internal List<OptionValue>? OptionValues { get; set; }
     }
 }

@@ -3,13 +3,13 @@ using Bibosio.ProductsModule.Domain.ValueObjects;
 
 namespace Bibosio.ProductsModule.Domain
 {
-    internal class Product : AppEntity
+    internal class Product(Guid id) : AppEntity(id)
     {
-        public Product(Guid id) : base(id)
-        {
-        }
+        internal required Sku Sku { get; set; }
 
-        public required Sku Sku { get; set; }
-        public List<Option>? ProductOptions { get; set; }
+        internal Guid CategoryId { get; set; }
+        internal Category? Category { get; set; }
+
+        internal List<ProductOptionValue>? ProductOptions { get; set; }
     }
 }

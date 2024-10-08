@@ -15,12 +15,18 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0-rc.1.24451.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0-rc.1.24457.2" />
     <PackageReference Include="Scalar.AspNetCore" Version="1.2.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Bibosio.CatalogModule\Bibosio.CatalogModule.csproj" />
     <ProjectReference Include="..\Bibosio.Common\Bibosio.Common.csproj" />
     <ProjectReference Include="..\Bibosio.ProductsModule\Bibosio.ProductsModule.csproj" />
     <ProjectReference Include="..\Bibosio.WeatherForecastModule\Bibosio.WeatherForecastModule.csproj" />

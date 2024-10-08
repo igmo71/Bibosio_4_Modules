@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bibosio.Common
+namespace Bibosio.Common.Exceptions
 {
     public class AppExceptionHandler : IExceptionHandler
     {
