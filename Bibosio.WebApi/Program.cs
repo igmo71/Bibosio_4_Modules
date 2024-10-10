@@ -31,10 +31,10 @@ namespace Bibosio.WebApi
             builder.Services.AddHealthChecks();
 
             builder.Services.AddProblemDetails();
-            builder.Services.AddExceptionHandler<AppExceptionHandler>();
             builder.Services.AddExceptionHandler<BadRequestExceptionHandler>();
             builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
             builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+            //builder.Services.AddExceptionHandler<AppExceptionHandler>();
 
             builder.Services.AddProductsModule(builder.Configuration);
 
