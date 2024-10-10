@@ -4,7 +4,10 @@ namespace Bibosio.Common
 {
     public abstract class AppEntity : IEntity<Guid>
     {
-        public AppEntity() { }
+        public AppEntity()
+        {
+            Id = Guid.CreateVersion7();
+        }
 
         public AppEntity(Guid id) => Id = id;
 

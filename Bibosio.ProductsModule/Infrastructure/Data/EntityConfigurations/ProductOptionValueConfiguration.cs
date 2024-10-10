@@ -8,7 +8,7 @@ namespace Bibosio.ProductsModule.Infrastructure.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ProductOptionValue> builder)
         {
-            builder.HasKey(x => new { x.ProductId, x.OptionId, x.ValueId });
+            builder.HasKey(x => new { x.ProductId, x.OptionId, x.OptionValueId });
         }
     }
 }

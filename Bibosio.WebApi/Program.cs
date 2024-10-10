@@ -1,3 +1,4 @@
+using Bibosio.CatalogModule;
 using Bibosio.Common.Exceptions;
 using Bibosio.ProductsModule;
 using Bibosio.WeatherForecastModule.Endpoints;
@@ -37,6 +38,7 @@ namespace Bibosio.WebApi
             //builder.Services.AddExceptionHandler<AppExceptionHandler>();
 
             builder.Services.AddProductsModule(builder.Configuration);
+            builder.Services.AddCatalogModule(builder.Configuration);
 
             var app = builder.Build();
 
