@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Bibosio.CatalogModule.Infrastructure.Data.Migrations
+namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
     public partial class Create_Base_Tables : Migration

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Bibosio.CatalogModule.Infrastructure.Data.EntityConfigurations
+namespace Bibosio.CatalogModule.Infrastructure.Database.EntityConfigurations
 {
     internal class CatalogItemConfig : IEntityTypeConfiguration<CatalogItem>
     {

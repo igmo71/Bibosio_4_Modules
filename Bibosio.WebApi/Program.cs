@@ -62,6 +62,7 @@ namespace Bibosio.WebApi
 
             app.MapWeatherForecastEndpoint();
             app.MapProductModuleEndpoints();
+            app.MapCatalogModuleEndpoints();
 
             app.Run();
         }

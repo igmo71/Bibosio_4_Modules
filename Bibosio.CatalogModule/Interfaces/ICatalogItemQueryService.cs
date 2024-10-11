@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bibosio.CatalogModule.Interfaces
 {
-    internal interface ICatalogQueryService
+    internal interface ICatalogItemQueryService
     {
         List<CatalogItem> GetParents(CatalogItem catalogItem);
     }

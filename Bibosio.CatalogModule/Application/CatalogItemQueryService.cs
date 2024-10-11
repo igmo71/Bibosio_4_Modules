@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bibosio.CatalogModule.Application
 {
-    internal class CatalogQueryService : ICatalogQueryService
+    internal class CatalogItemQueryService : ICatalogItemQueryService
     {
         public List<CatalogItem> GetParents(CatalogItem catalogItem)
         {

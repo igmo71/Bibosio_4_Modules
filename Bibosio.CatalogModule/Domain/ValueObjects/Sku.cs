@@ -2,7 +2,7 @@
 
 namespace Bibosio.CatalogModule.Domain.ValueObjects
 {
-    internal record Sku(string Value)
+    public record Sku(string Value)
     {
         public static Sku From(string? sku) =>
             new(sku

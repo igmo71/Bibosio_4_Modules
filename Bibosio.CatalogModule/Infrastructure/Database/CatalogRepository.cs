@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bibosio.CatalogModule.Infrastructure.Data
+namespace Bibosio.CatalogModule.Infrastructure.Database
 {
     internal class CatalogRepository
     {

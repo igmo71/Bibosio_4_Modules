@@ -1,8 +1,8 @@
 ﻿using Bibosio.CatalogModule.Domain;
-using Bibosio.CatalogModule.Infrastructure.Data.EntityConfigurations;
+using Bibosio.CatalogModule.Infrastructure.Database.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bibosio.CatalogModule.Infrastructure.Data
+namespace Bibosio.CatalogModule.Infrastructure.Database
 {
     internal class CatalogDbContext : DbContext
     {
