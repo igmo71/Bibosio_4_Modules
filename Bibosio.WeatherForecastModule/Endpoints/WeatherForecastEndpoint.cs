@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Serilog;
+using SerilogTracing;
 
 namespace Bibosio.WeatherForecastModule.Endpoints
 {
@@ -17,21 +19,34 @@ namespace Bibosio.WeatherForecastModule.Endpoints
 
             builder.MapGet("/weatherforecast", (HttpContext httpContext) =>
             {
-                var summaries = _summaries;
+                using var activity = Log.Logger.ForContext(typeof(WeatherForecastEndpoint)).StartActivity(nameof(WeatherForecast));
 
-                var forecast = Enumerable.Range(1, 5).Select(index =>
-                    new WeatherForecast
-                    {
-                        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                        TemperatureC = Random.Shared.Next(-20, 55),
-                        Summary = summaries[Random.Shared.Next(summaries.Length)]
-                    })
-                    .ToArray();
+                WeatherForecast[] forecast = GetForecast();
+
+                activity.AddProperty("forecast", forecast);
+
+                Log.ForContext(typeof(WeatherForecastEndpoint)).Debug("{Source} {@WeatherForecast}", nameof(WeatherForecast), forecast);
+
                 return forecast;
             })
             .WithName("GetWeatherForecast");
 
             return builder;
+        }
+
+        private static WeatherForecast[] GetForecast()
+        {
+            var summaries = _summaries;
+
+            var forecast = Enumerable.Range(1, 5).Select(index =>
+                new WeatherForecast
+                {
+                    Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    TemperatureC = Random.Shared.Next(-20, 55),
+                    Summary = summaries[Random.Shared.Next(summaries.Length)]
+                })
+                .ToArray();
+            return forecast;
         }
     }
 }

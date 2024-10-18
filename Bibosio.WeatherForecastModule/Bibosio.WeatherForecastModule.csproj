@@ -10,4 +10,8 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Bibosio.Common\Bibosio.Common.csproj" />
+	</ItemGroup>
+
 </Project>
