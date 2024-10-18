@@ -1,15 +1,19 @@
-﻿using Bibosio.ProductsModule.Dto;
+﻿using Bibosio.Common;
+using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Bibosio.ProductsModule.Application
 {
     internal class ProductQueryService : IProductQueryService
     {
         private readonly IProductRepository _repository;
+        private readonly ILogger<ProductQueryService> _logger;
 
-        public ProductQueryService(IProductRepository repository)
+        public ProductQueryService(IProductRepository repository, ILogger<ProductQueryService> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         public async Task<ProductVm[]> GetProductsAsync(int skip, int top)
@@ -17,6 +21,8 @@ namespace Bibosio.ProductsModule.Application
             var products = await _repository.GetAllAsync(skip, top);
 
             var result = products.Select(e => ProductVm.From(e)).ToArray();
+
+            _logger.CouldNotOpenSocket(LogLevel.Error, "localhost");
 
             return result;
         }

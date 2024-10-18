@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bibosio.CatalogModule.Endpoints
+namespace Bibosio.CatalogModule.Presentation
 {
     internal static class CatalogItemQueryEndpoints
     {

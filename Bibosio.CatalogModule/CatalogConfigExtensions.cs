@@ -1,5 +1,5 @@
 ﻿using Bibosio.CatalogModule.Application;
-using Bibosio.CatalogModule.Endpoints;
+using Bibosio.CatalogModule.Presentation;
 using Bibosio.CatalogModule.Infrastructure.Database;
 using Bibosio.CatalogModule.Interfaces;
 using Microsoft.AspNetCore.Routing;
