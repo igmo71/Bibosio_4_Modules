@@ -5,8 +5,6 @@ namespace Bibosio.CatalogModule.Domain
 {
     internal class CatalogItem(Guid id) : AppEntity(id)
     {
-
-
         public string? Name { get; set; }
         public bool IsUseInProductName { get; set; } // TODO: ?
 

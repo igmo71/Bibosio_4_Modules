@@ -70,7 +70,6 @@ namespace Bibosio.Common.OpenTelemetry
                                     options.Endpoint = new Uri(oTelConfig.Zipkin.Endpoint);
                                 });
                             break;
-
                         case "otlp":
                             configure.AddOtlpExporter(otlpOptions =>
                             {
@@ -79,7 +78,6 @@ namespace Bibosio.Common.OpenTelemetry
                                 //otlpOptions.Headers = "X-Seq-ApiKey=x4d4zxG37lHw9bSxP74B";
                             });
                             break;
-
                         default:
                             configure.AddConsoleExporter();
                             break;

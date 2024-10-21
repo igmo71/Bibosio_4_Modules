@@ -1,13 +1,12 @@
 using Bibosio.CatalogModule;
 using Bibosio.Common.Exceptions;
 using Bibosio.Common.OpenTelemetry;
-using Bibosio.Common.Serilog;
 using Bibosio.ProductsModule;
 using Bibosio.WeatherForecastModule.Endpoints;
 using Scalar.AspNetCore;
-using Serilog;
-using SerilogTracing;
 using System.Reflection;
+//using Serilog;
+//using SerilogTracing;
 
 namespace Bibosio.WebApi
 {
@@ -17,23 +16,25 @@ namespace Bibosio.WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSerilog(options =>
-                options.ReadFrom.Configuration(builder.Configuration));
+            #region Serilog
+            //builder.Services.AddSerilog(options =>
+            //    options.ReadFrom.Configuration(builder.Configuration));
+            //
+            //using var activityListener = new ActivityListenerConfiguration()
+            //    .Instrument.AspNetCoreRequests()
+            //    .Instrument.SqlClientCommands()
+            //    .Instrument.HttpClientRequests()
+            //    .TraceToSharedLogger();
+            #endregion
 
-            using var _ = new ActivityListenerConfiguration()
-                .Instrument.AspNetCoreRequests()
-                .Instrument.SqlClientCommands()
-                .TraceToSharedLogger();
+            builder.Logging.ClearProviders();
 
-            //builder.Logging.ClearProviders();            
+            var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Section).Get<OpenTelemetryConfig>()
+                ?? throw new ApplicationException("OpenTelemetry configuration not found");
+            openTelemetryConfig.Environment = builder.Environment;
+            openTelemetryConfig.ServiceVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "unknown";
 
-
-            //var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Section).Get<OpenTelemetryConfig>()
-            //    ?? throw new ApplicationException("OpenTelemetry configuration not found");
-            //openTelemetryConfig.ServiceVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "unknown";
-            //openTelemetryConfig.Environment = builder.Environment;
-
-            //builder.Services.ConfigureOpenTelemetry(openTelemetryConfig);
+            builder.Services.ConfigureOpenTelemetry(openTelemetryConfig);
 
             builder.Services.AddAuthorization();
 
@@ -80,7 +81,7 @@ namespace Bibosio.WebApi
             app.MapCatalogModuleEndpoints();
             app.MapTestEndpoint();
 
-            //app.IfUsePrometheusMetricsExporter(openTelemetryConfig);
+            app.IfUsePrometheusMetricsExporter(openTelemetryConfig);
 
             app.Run();
         }

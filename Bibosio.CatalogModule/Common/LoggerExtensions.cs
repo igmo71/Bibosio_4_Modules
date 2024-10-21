@@ -9,9 +9,10 @@ namespace Bibosio.CatalogModule.Common
             //EventId = 7, 
             Level = LogLevel.Information,
             Message = "Catalog Item Created with Id {Id}")]
-        public static partial void CatalogItemCreatedId(this ILogger logger, string id);
+        public static partial void CatalogItemCreatedId(
+            this ILogger logger, 
+            string id);
 
-        // TODO: Add OpenTelemetry
         [LoggerMessage(
             //EventId = 8,
             Level = LogLevel.Debug,

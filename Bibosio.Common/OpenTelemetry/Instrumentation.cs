@@ -14,12 +14,12 @@ namespace Bibosio.Common.OpenTelemetry
             string? version = typeof(Instrumentation).Assembly.GetName().Version?.ToString();
             ActivitySource = new ActivitySource(ActivitySourceName, version);
             meter = new Meter(MeterName, version);
-            FreezingDaysCounter = meter.CreateCounter<long>("weather.days.freezing", description: "The number of days where the temperature is below freezing");
+            CatalogItemCreatedCounter = meter.CreateCounter<long>(name: "catalog.item.created.counter", description: "The number of CatalogItem created");
         }
 
         public ActivitySource ActivitySource { get; }
 
-        public Counter<long> FreezingDaysCounter { get; }
+        public Counter<long> CatalogItemCreatedCounter { get; }
 
         public void Dispose()
         {
