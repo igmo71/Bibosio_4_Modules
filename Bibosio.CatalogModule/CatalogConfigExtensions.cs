@@ -20,8 +20,11 @@ namespace Bibosio.CatalogModule
                 options.UseSqlite("Data Source=Catalog.db");
             });
 
-            services.AddScoped<ICatalogItemCommandService, CatalogItemCommandService>();
+            services.AddScoped<CatalogItemCommandService>();
+            services.AddScoped<ICatalogItemCommandService, CatalogItemCommandServiceDecorator>();
+
             services.AddScoped<ICatalogItemQueryService, CatalogItemQueryService>();
+            
             services.AddScoped<ICatalogItemRepository, CatalogItemRepository>();
 
             return services;
