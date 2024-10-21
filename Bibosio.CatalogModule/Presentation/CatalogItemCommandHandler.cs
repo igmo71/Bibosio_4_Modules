@@ -12,18 +12,11 @@ namespace Bibosio.CatalogModule.Presentation
     {
         internal static async Task<Results<Created<CatalogItem>, BadRequest>> CreateCatalogItemAsync(
             CatalogItem catalogItem, 
-            ICatalogItemCommandService service,
-            CatalogDbContext dbContext,
-            ILogger<CatalogItemCommandHandler> logger)
+            ICatalogItemCommandService service)
         {
-            await dbContext.CatalogItems.AddAsync(catalogItem);
-            await dbContext.SaveChangesAsync();
-            
-            logger.CatalogItemCreatedId(catalogItem.Id.ToString());
-            logger.CatalogItemCreatedItem(catalogItem);
+            var result = await service.CreateCatalogItemAsync(catalogItem);
 
-
-            return TypedResults.Created($"/api/catalog/{catalogItem.Id}", catalogItem);
+            return TypedResults.Created($"/api/catalog/{result.Id}", result);
         }
 
         internal static async Task DeleteCatalogItemAsync(HttpContext context)

@@ -21,6 +21,8 @@ namespace Bibosio.CatalogModule
             });
 
             services.AddScoped<ICatalogItemCommandService, CatalogItemCommandService>();
+            services.AddScoped<ICatalogItemQueryService, CatalogItemQueryService>();
+            services.AddScoped<ICatalogItemRepository, CatalogItemRepository>();
 
             return services;
         }

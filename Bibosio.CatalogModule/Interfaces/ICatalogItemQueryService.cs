@@ -1,13 +1,9 @@
 ﻿using Bibosio.CatalogModule.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Bibosio.Interfaces;
 
 namespace Bibosio.CatalogModule.Interfaces
 {
-    internal interface ICatalogItemQueryService
+    internal interface ICatalogItemQueryService : IQueryService
     {
         List<CatalogItem> GetParents(CatalogItem catalogItem);
     }

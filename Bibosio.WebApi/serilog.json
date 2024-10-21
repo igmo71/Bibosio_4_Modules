@@ -1,8 +1,4 @@
 {
-  "ConnectionStrings": {
-    //"DefaultConnection": "Server=postgres-1;Port=5432;Database=bibosio;User Id=admin;Password=1qaz@WSX;"
-    "DefaultConnection": "Server=localhost;Port=5432;Database=bibosio;User Id=admin;Password=1qaz@WSX;"
-  },
   "Serilog": {
     "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File", "Serilog.Sinks.Seq" ],
     "MinimumLevel": {
@@ -55,38 +51,5 @@
       "Application": "Bibosio",
       "Environment": "Development"
     }
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Debug",
-      "Microsoft.AspNetCore": "Warning"
-    },
-    "OpenTelemetry": {
-      "IncludeFormattedMessage": true,
-      "IncludeScopes": true,
-      "ParseStateValues": true
-    }
-  },
-  "OpenTelemetry": {
-    "LogExporter": "otlp",
-    "TracingExporter": "otlp",
-    "MetricsExporter": "console",
-    "HistogramAggregation": "explicit",
-    "AspNetCoreInstrumentation": {
-      "RecordException": "true"
-    },
-    "Otlp": {
-      "Endpoint": "http://localhost:5341/ingest/otlp/v1"
-      //"Endpoint": "http://seq-1:5341/ingest/otlp/v1"
-    },
-    "Zipkin": {
-      "Endpoint": "http://localhost:9411/api/v2/spans"
-    }
-  },
-  "Kafka": {
-    "BootstrapServers": "kafka-1:9092,kafka-2:9092",
-    "ProductCreatedTopic": "product-created",
-    "ProductUpdatedTopic": "product-updated"
-  },
-  "AllowedHosts": "*"
+  }
 }

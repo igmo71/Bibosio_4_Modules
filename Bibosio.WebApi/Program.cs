@@ -1,10 +1,13 @@
 using Bibosio.CatalogModule;
 using Bibosio.Common.Exceptions;
+using Bibosio.Common.OpenTelemetry;
+using Bibosio.Common.Serilog;
 using Bibosio.ProductsModule;
 using Bibosio.WeatherForecastModule.Endpoints;
 using Scalar.AspNetCore;
 using Serilog;
 using SerilogTracing;
+using System.Reflection;
 
 namespace Bibosio.WebApi
 {
@@ -21,6 +24,16 @@ namespace Bibosio.WebApi
                 .Instrument.AspNetCoreRequests()
                 .Instrument.SqlClientCommands()
                 .TraceToSharedLogger();
+
+            //builder.Logging.ClearProviders();            
+
+
+            //var openTelemetryConfig = builder.Configuration.GetSection(OpenTelemetryConfig.Section).Get<OpenTelemetryConfig>()
+            //    ?? throw new ApplicationException("OpenTelemetry configuration not found");
+            //openTelemetryConfig.ServiceVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "unknown";
+            //openTelemetryConfig.Environment = builder.Environment;
+
+            //builder.Services.ConfigureOpenTelemetry(openTelemetryConfig);
 
             builder.Services.AddAuthorization();
 
@@ -39,6 +52,8 @@ namespace Bibosio.WebApi
 
             builder.Services.AddProductsModule(builder.Configuration);
             builder.Services.AddCatalogModule(builder.Configuration);
+
+            builder.Services.AddScoped<ITestService, TestService>();
 
             var app = builder.Build();
 
@@ -63,6 +78,9 @@ namespace Bibosio.WebApi
             app.MapWeatherForecastEndpoint();
             app.MapProductModuleEndpoints();
             app.MapCatalogModuleEndpoints();
+            app.MapTestEndpoint();
+
+            //app.IfUsePrometheusMetricsExporter(openTelemetryConfig);
 
             app.Run();
         }
