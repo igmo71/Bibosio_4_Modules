@@ -13,9 +13,9 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.EntityConfigurations
             builder
                 .OwnsOne(e => e.Sku);
             builder
-                .HasOne(e => e.Parent)
-                .WithMany(e => e.Children)
-                .HasForeignKey(e => e.ParentId)
+                .HasOne(e => e.ParentItem)
+                .WithMany(e => e.ChildItems)
+                .HasForeignKey(e => e.ParentItemId)
                 .HasPrincipalKey(e => e.Id);
         }
     }

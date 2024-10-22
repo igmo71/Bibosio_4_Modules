@@ -13,10 +13,10 @@ namespace Bibosio.CatalogModule.Domain
 
         public Sku? Sku { get; set; }
 
-        public Guid? ParentId { get; set; }
-        public CatalogItem? Parent { get; set; }
+        public Guid? ParentItemId { get; set; }
+        public CatalogItem? ParentItem { get; set; }
 
-        public List<CatalogItem>? Children { get; set; }
+        public List<CatalogItem>? ChildItems { get; set; }
 
         public List<CatalogItemOption> CatalogItemOptions { get; set; } = new();
 

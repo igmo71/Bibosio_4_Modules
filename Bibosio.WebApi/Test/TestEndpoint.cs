@@ -1,4 +1,4 @@
-﻿namespace Bibosio.WebApi
+﻿namespace Bibosio.WebApi.Test
 {
     public static class TestEndpoint
     {

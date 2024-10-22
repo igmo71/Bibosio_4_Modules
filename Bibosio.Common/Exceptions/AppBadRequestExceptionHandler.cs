@@ -2,41 +2,40 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
 
 namespace Bibosio.Common.Exceptions
 {
-    public class ValidationExceptionHandler : IExceptionHandler
+    public sealed class AppBadRequestExceptionHandler : IExceptionHandler
     {
-        private readonly ILogger<ValidationExceptionHandler> _logger;
+        private readonly ILogger<AppBadRequestExceptionHandler> _logger;
 
-        public ValidationExceptionHandler(ILogger<ValidationExceptionHandler> logger)
+        public AppBadRequestExceptionHandler(ILogger<AppBadRequestExceptionHandler> logger)
         {
             _logger = logger;
         }
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            if (exception is not ValidationException validationException)
+            if (exception is not AppBadRequestException badRequestException)
             {
                 return false;
             }
 
-            _logger.LogError(validationException, "Exception occurred: {Message} {@ValidationResult}", validationException.Message, validationException.ValidationResult);
+            _logger.LogError(badRequestException, "Exception occurred: {Message}", badRequestException.Message);
 
             var problemDetails = new ProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
-                Title = "Validation Error",
-                Detail = validationException.Message                
+                Title = "Bad Request",
+                Detail = badRequestException.Message
             };
 
             httpContext.Response.StatusCode = problemDetails.Status.Value;
 
-            //await httpContext.Response.WriteAsJsonAsync(validationException.ValidationResult, cancellationToken);
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
             return true;
         }
     }
+
 }

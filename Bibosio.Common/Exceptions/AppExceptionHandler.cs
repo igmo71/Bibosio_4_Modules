@@ -4,22 +4,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bibosio.Common.Exceptions
 {
-    public class AppExceptionHandler : IExceptionHandler
+    public class AppExceptionHandler(IProblemDetailsService problemDetailsService) : IExceptionHandler
     {
-        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        public async ValueTask<bool> TryHandleAsync(
+            HttpContext httpContext,
+            Exception exception,
+            CancellationToken cancellationToken)
         {
-            httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-
             var problemDetails = new ProblemDetails
             {
-                Status = StatusCodes.Status500InternalServerError,
-                Title = "Server error",
-                Detail = exception.Message
+                //Status = exception switch
+                //{
+                //    ArgumentException => StatusCodes.Status400BadRequest,
+                //    AppNotFoundException => StatusCodes.Status404NotFound,
+                //    _ => StatusCodes.Status500InternalServerError
+                //},
+                Title = "An error occurred",
+                Type = exception.GetType().Name,
+                Detail = exception.Message,
+                Instance = $"{httpContext.Request.Method} {httpContext.Request.Path}"
             };
 
-            await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+            //Activity? activity = httpContext.Features.Get<IHttpActivityFeature>()?.Activity;
+            //problemDetails.Extensions.TryAdd("traceId", activity?.Id);
+            //problemDetails.Extensions.TryAdd("requestId", httpContext.TraceIdentifier);
 
-            return true;
+            return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
+            {
+                Exception = exception,
+                HttpContext = httpContext,
+                ProblemDetails = problemDetails
+            });
+
         }
     }
 }

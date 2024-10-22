@@ -5,18 +5,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Bibosio.Common.Exceptions
 {
-    public sealed class NotFoundExceptionHandler : IExceptionHandler
+    public sealed class AppNotFoundExceptionHandler : IExceptionHandler
     {
-        private readonly ILogger<NotFoundExceptionHandler> _logger;
+        private readonly ILogger<AppNotFoundExceptionHandler> _logger;
 
-        public NotFoundExceptionHandler(ILogger<NotFoundExceptionHandler> logger)
+        public AppNotFoundExceptionHandler(ILogger<AppNotFoundExceptionHandler> logger)
         {
             _logger = logger;
         }
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            if (exception is not NotFoundException notFoundException)
+            if (exception is not AppNotFoundException notFoundException)
             {
                 return false;
             }
