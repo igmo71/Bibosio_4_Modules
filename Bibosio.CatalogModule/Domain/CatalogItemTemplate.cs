@@ -4,12 +4,12 @@
     {
         private readonly string _template;
 
-        internal CatalogItemTemplate(string template)
+        public CatalogItemTemplate(string template)
         {
             _template = template;
         }
 
-        internal string Generate(CatalogItem catalogItem)
+        public string Generate(CatalogItem catalogItem)
         {
             string result = _template;
 

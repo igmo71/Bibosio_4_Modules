@@ -6,7 +6,7 @@ namespace Bibosio.CatalogModule.Domain.Common
 {
     internal static class Validation
     {
-        internal static string AssertNotEmpty(this string? value,
+        public static string AssertNotEmpty(this string? value,
             [CallerArgumentExpression(nameof(value))] string? argumentName = null)
         {
             return !string.IsNullOrWhiteSpace(value)
@@ -14,7 +14,7 @@ namespace Bibosio.CatalogModule.Domain.Common
                 : throw new ApplicationException(argumentName);
         }
 
-        internal static string AssertMatchesRegex(this string value, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
+        public static string AssertMatchesRegex(this string value, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
             [CallerArgumentExpression(nameof(value))] string? argumentName = null)
         {
             return Regex.IsMatch(value.AssertNotEmpty(), pattern)

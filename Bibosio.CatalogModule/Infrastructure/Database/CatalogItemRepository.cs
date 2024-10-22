@@ -3,14 +3,9 @@ using Bibosio.CatalogModule.Interfaces;
     
 namespace Bibosio.CatalogModule.Infrastructure.Database
 {
-    internal class CatalogItemRepository : ICatalogItemRepository
+    internal class CatalogItemRepository(CatalogDbContext dbContext) : ICatalogItemRepository
     {
-        private readonly CatalogDbContext _dbContext;
-
-        public CatalogItemRepository(CatalogDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        private readonly CatalogDbContext _dbContext = dbContext;
 
         public async Task<int> CreateAsync(CatalogItem entity)
         {

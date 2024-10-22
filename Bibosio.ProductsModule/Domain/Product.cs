@@ -3,7 +3,7 @@ using Bibosio.ProductsModule.Domain.ValueObjects;
 
 namespace Bibosio.ProductsModule.Domain
 {
-    internal class Product(Guid id) : AppEntity(id)
+    internal class Product : AppEntity
     {
         internal required Sku Sku { get; set; }
 

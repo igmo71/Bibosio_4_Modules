@@ -2,7 +2,7 @@
 
 namespace Bibosio.ProductsModule.Domain
 {
-    internal class OptionValue(Guid id) : AppEntity(id)
+    internal class OptionValue : AppEntity
     {
         internal required string Value { get; set; }
 

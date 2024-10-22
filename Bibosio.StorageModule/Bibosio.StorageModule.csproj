@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bibosio\Bibosio.Common\Bibosio.Common.csproj" />
+    <ProjectReference Include="..\Bibosio.Common\Bibosio.Common.csproj" />
   </ItemGroup>
 
 </Project>

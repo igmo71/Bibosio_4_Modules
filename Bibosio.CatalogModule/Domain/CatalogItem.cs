@@ -3,7 +3,7 @@ using Bibosio.Common;
 
 namespace Bibosio.CatalogModule.Domain
 {
-    internal class CatalogItem(Guid id) : AppEntity(id)
+    internal class CatalogItem : AppEntity
     {
         public string? Name { get; set; }
         public bool IsUseInProductName { get; set; } // TODO: ?

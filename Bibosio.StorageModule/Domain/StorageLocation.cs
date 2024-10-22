@@ -1,9 +1,4 @@
 ﻿using Bibosio.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bibosio.StorageModule.Domain
 {
@@ -39,6 +34,7 @@ namespace Bibosio.StorageModule.Domain
             }
         }
 
+        // TODO: GetParents Not Implemented
         private List<StorageLocation>? GetParents()
         {
             throw new NotImplementedException();

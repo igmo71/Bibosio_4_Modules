@@ -2,14 +2,14 @@
 {
     internal class CatalogItemOption
     {
-        internal CatalogItemOption(CatalogItem catalogItem, Option option, OptionValue optionValue)
+        public CatalogItemOption(CatalogItem catalogItem, Option option, OptionValue optionValue)
         {
             CatalogItem = catalogItem;
             Option = option;
             OptionValue = optionValue;
         }
 
-        internal CatalogItemOption(Guid catalogItemId, Guid optionId, Guid optionValueId)
+        public CatalogItemOption(Guid catalogItemId, Guid optionId, Guid optionValueId)
         {
             CatalogItemId = catalogItemId;
             OptionId = optionId;

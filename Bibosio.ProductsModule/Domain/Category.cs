@@ -2,7 +2,7 @@
 
 namespace Bibosio.ProductsModule.Domain
 {
-    internal class Category(Guid id) : AppEntity(id)
+    internal class Category : AppEntity
     {
         internal required string Name { get; set; }
         internal bool IsUseInProductName { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Bibosio.StorageModule.Domain
 {
-    internal class LocationType : AppEntity
+    internal class MovementType : AppEntity
     {
         public string? Name { get; set; }
     }

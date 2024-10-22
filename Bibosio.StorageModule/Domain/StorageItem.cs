@@ -1,4 +1,9 @@
-﻿namespace Bibosio.StorageModule.Domain
+﻿using Bibosio.Common;
+
+namespace Bibosio.StorageModule.Domain
 {
-    public record StorageItem(Guid Id, string Name);
+    internal class StorageItem : AppEntity
+    {
+        public string? Name { get; set; }
+    }
 }

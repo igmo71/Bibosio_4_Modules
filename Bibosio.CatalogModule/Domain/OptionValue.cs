@@ -2,7 +2,7 @@
 
 namespace Bibosio.CatalogModule.Domain
 {
-    internal class OptionValue(Guid id) : AppEntity(id)
+    internal class OptionValue : AppEntity
     {
         public string? Value { get; set; }
 
