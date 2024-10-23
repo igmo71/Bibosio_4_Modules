@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Bibosio.ProductsModule.Infrastructure.Data.Migrations
+namespace Bibosio.ProductsModule.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
     public partial class Initialize : Migration

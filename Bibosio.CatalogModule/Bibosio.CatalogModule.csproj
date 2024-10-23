@@ -7,15 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\Database\Migrations\Sqlite\**" />
+    <EmbeddedResource Remove="Infrastructure\Database\Migrations\Sqlite\**" />
+    <None Remove="Infrastructure\Database\Migrations\Sqlite\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Bibosio.Common\Bibosio.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0-rc.1.24451.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Infrastructure\Database\Migrations\Sqlite\" />
   </ItemGroup>
 
 </Project>

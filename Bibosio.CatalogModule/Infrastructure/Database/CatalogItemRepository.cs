@@ -1,6 +1,6 @@
 ﻿using Bibosio.CatalogModule.Domain;
 using Bibosio.CatalogModule.Interfaces;
-    
+
 namespace Bibosio.CatalogModule.Infrastructure.Database
 {
     internal class CatalogItemRepository(CatalogDbContext dbContext) : ICatalogItemRepository

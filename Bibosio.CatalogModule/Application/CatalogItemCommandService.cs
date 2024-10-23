@@ -16,6 +16,8 @@ namespace Bibosio.CatalogModule.Application
         {
             await _catalogItemRepository.CreateAsync(catalogItem);
 
+            CatalogItem vvv = new CatalogItem();
+
             return catalogItem;
         }
     }

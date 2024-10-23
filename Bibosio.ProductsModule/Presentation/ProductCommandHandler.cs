@@ -17,7 +17,7 @@ namespace Bibosio.ProductsModule.Presentation
             return TypedResults.Created(id.ToString());
         }
 
-        internal static async Task<NoContent> UpdateProductAsync(
+        public static async Task<NoContent> UpdateProductAsync(
             [FromBody] UpdateProductDto updateProductDto,
             [FromServices] IProductCommandService productCommandService)
         {
@@ -26,7 +26,7 @@ namespace Bibosio.ProductsModule.Presentation
             return TypedResults.NoContent();
         }
 
-        internal static async Task<NoContent> DeleteProductAsync(
+        public static async Task<NoContent> DeleteProductAsync(
             [FromQuery] string id,
             [FromServices] IProductCommandService productCommandService)
         {

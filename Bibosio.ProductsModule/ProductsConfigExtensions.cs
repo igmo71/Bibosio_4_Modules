@@ -1,10 +1,10 @@
 ﻿using Bibosio.Interfaces;
 using Bibosio.ProductsModule.Application;
-using Bibosio.ProductsModule.Presentation;
-using Bibosio.ProductsModule.Infrastructure.Data;
+using Bibosio.ProductsModule.Infrastructure.Database;
 using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
 using Bibosio.ProductsModule.Infrastructure.EventBus.Kafka;
 using Bibosio.ProductsModule.Interfaces;
+using Bibosio.ProductsModule.Presentation;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

@@ -3,7 +3,7 @@
     internal class ProductOptionValue
     {
         internal Guid ProductId { get; set; }
-        internal Product? Product { get; set; }  
+        internal Product? Product { get; set; }
 
         internal Guid OptionId { get; set; }
         internal Option? Option { get; set; }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Bibosio.ProductsModule.Presentation
 {
-    public static class ProductCommandEndpoints
+    internal static class ProductCommandEndpoints
     {
         public static IEndpointRouteBuilder MapProductCommandEndpoints(this IEndpointRouteBuilder builder)
         {

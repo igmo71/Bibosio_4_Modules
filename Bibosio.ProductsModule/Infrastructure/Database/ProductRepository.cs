@@ -2,7 +2,7 @@
 using Bibosio.ProductsModule.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bibosio.ProductsModule.Infrastructure.Data
+namespace Bibosio.ProductsModule.Infrastructure.Database
 {
     internal class ProductRepository : IProductRepository
     {
@@ -32,7 +32,7 @@ namespace Bibosio.ProductsModule.Infrastructure.Data
             var result = await _dbContext.Products
                 .Where(e => e.Id == id)
                 .ExecuteDeleteAsync();
-            return result;    
+            return result;
         }
 
         public Task<Product[]> GetAllAsync(int skip, int take)

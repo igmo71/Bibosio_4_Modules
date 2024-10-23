@@ -1,5 +1,4 @@
-﻿using Bibosio.ProductsModule.Domain;
-using Bibosio.ProductsModule.Dto;
+﻿using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

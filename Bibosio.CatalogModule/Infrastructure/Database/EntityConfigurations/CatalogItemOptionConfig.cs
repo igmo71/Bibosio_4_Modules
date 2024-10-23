@@ -9,7 +9,7 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.EntityConfigurations
         public void Configure(EntityTypeBuilder<CatalogItemOption> builder)
         {
             builder
-                .HasKey(e => new {e.CatalogItemId, e.OptionId, e.OptionValueId});
+                .HasKey(e => new { e.CatalogItemId, e.OptionId, e.OptionValueId });
             builder
                 .HasOne(e => e.CatalogItem)
                 .WithMany(e => e.CatalogItemOptions)

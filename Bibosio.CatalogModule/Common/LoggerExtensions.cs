@@ -10,7 +10,7 @@ namespace Bibosio.CatalogModule.Common
             Level = LogLevel.Information,
             Message = "Catalog Item Created with Id {Id}")]
         public static partial void CatalogItemCreatedId(
-            this ILogger logger, 
+            this ILogger logger,
             string id);
 
         [LoggerMessage(

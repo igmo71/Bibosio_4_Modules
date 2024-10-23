@@ -1,5 +1,4 @@
 ﻿using Bibosio.Interfaces;
-using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Dto;
 
 namespace Bibosio.ProductsModule.Interfaces

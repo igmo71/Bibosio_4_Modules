@@ -8,7 +8,7 @@ namespace Bibosio.CatalogModule.Presentation
     internal static class CatalogItemCommandHandler
     {
         public static async Task<Results<Created<CatalogItem>, BadRequest>> CreateCatalogItemAsync(
-            CatalogItem catalogItem, 
+            CatalogItem catalogItem,
             ICatalogItemCommandService service)
         {
             var result = await service.CreateCatalogItemAsync(catalogItem);

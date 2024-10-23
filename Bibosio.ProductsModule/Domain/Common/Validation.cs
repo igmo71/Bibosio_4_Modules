@@ -9,8 +9,8 @@ namespace Bibosio.ProductsModule.Domain.Common
         public static string AssertNotEmpty(this string? value,
             [CallerArgumentExpression(nameof(value))] string? argumentName = null)
         {
-            return !string.IsNullOrWhiteSpace(value) 
-                ? value 
+            return !string.IsNullOrWhiteSpace(value)
+                ? value
                 : throw new ApplicationException(argumentName);
         }
 

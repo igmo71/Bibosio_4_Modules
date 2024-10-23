@@ -1,10 +1,10 @@
-﻿using Bibosio.CatalogModule.Domain;
+﻿using Bibosio.CatalogModule.Common;
+using Bibosio.CatalogModule.Domain;
 using Bibosio.CatalogModule.Interfaces;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics.Metrics;
-using System.Diagnostics;
 using Bibosio.Common.OpenTelemetry;
-using Bibosio.CatalogModule.Common;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
 //using Serilog;
 //using SerilogTracing;
 
@@ -19,7 +19,7 @@ namespace Bibosio.CatalogModule.Application
         private readonly Counter<long> _catalogItemCreatedCounter;
 
         public CatalogItemCommandServiceDecorator(
-            CatalogItemCommandService commandService,   
+            CatalogItemCommandService commandService,
             ILogger<CatalogItemCommandService> logger,
             Instrumentation instrumentation)
         {

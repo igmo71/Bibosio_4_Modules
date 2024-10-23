@@ -7,7 +7,7 @@ namespace Bibosio.CatalogModule.Application
     {
         public CatalogItemQueryService()
         {
-            
+
         }
 
         public List<CatalogItem> GetParents(CatalogItem catalogItem)

@@ -1,8 +1,8 @@
 ﻿using Bibosio.ProductsModule.Domain;
-using Bibosio.ProductsModule.Infrastructure.Data.EntityConfigurations;
+using Bibosio.ProductsModule.Infrastructure.Database.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bibosio.ProductsModule.Infrastructure.Data
+namespace Bibosio.ProductsModule.Infrastructure.Database
 {
     internal class ProductsDbContext : DbContext
     {

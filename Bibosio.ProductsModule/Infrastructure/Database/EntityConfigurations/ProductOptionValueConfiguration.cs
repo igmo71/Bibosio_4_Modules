@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Bibosio.ProductsModule.Infrastructure.Data.EntityConfigurations
+namespace Bibosio.ProductsModule.Infrastructure.Database.EntityConfigurations
 {
     internal class ProductOptionValueConfiguration : IEntityTypeConfiguration<ProductOptionValue>
     {

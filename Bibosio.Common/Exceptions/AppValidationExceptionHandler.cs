@@ -27,7 +27,7 @@ namespace Bibosio.Common.Exceptions
             {
                 Status = StatusCodes.Status400BadRequest,
                 Title = "Validation Error",
-                Detail = appValidationException.Message                
+                Detail = appValidationException.Message
             };
 
             httpContext.Response.StatusCode = problemDetails.Status.Value;

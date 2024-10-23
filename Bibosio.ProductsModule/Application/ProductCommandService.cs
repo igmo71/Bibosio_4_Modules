@@ -28,7 +28,7 @@ namespace Bibosio.ProductsModule.Application
 
             var id = Guid.CreateVersion7();
 
-            var product = new Product(id) { Sku = Sku.From(createProductDto.Sku) };
+            var product = new Product() { Sku = Sku.From(createProductDto.Sku) };
 
             _ = await _repository.CreateAsync(product);
 
@@ -43,7 +43,11 @@ namespace Bibosio.ProductsModule.Application
         {
             using var activity = _logger.StartActivity(nameof(UpdateProductAsync));
 
-            var product = new Product(updateProductDto.Id) { Sku = Sku.From(updateProductDto.Sku) };
+            var product = new Product()
+            {
+                Id = updateProductDto.Id,
+                Sku = Sku.From(updateProductDto.Sku)
+            };
 
             _ = await _repository.UpdateAsync(product);
 
