@@ -5,18 +5,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Bibosio.Common.Exceptions
 {
-    public sealed class AppBadRequestExceptionHandler : IExceptionHandler
+    public sealed class BadRequestExceptionHandler : IExceptionHandler
     {
-        private readonly ILogger<AppBadRequestExceptionHandler> _logger;
+        private readonly ILogger<BadRequestExceptionHandler> _logger;
 
-        public AppBadRequestExceptionHandler(ILogger<AppBadRequestExceptionHandler> logger)
+        public BadRequestExceptionHandler(ILogger<BadRequestExceptionHandler> logger)
         {
             _logger = logger;
         }
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            if (exception is not AppBadRequestException badRequestException)
+            if (exception is not BadRequestException badRequestException)
             {
                 return false;
             }

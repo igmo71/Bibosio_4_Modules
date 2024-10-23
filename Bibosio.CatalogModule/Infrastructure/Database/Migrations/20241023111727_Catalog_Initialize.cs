@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Create_Base_Tables : Migration
+    public partial class Catalog_Initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,14 +24,14 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
                     IsUseInProductName = table.Column<bool>(type: "boolean", nullable: false),
                     IsCategory = table.Column<bool>(type: "boolean", nullable: false),
                     Sku_Value = table.Column<string>(type: "text", nullable: true),
-                    ParentId = table.Column<Guid>(type: "uuid", nullable: true)
+                    ParentItemId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CatalogItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CatalogItems_CatalogItems_ParentId",
-                        column: x => x.ParentId,
+                        name: "FK_CatalogItems_CatalogItems_ParentItemId",
+                        column: x => x.ParentItemId,
                         principalSchema: "catalog",
                         principalTable: "CatalogItems",
                         principalColumn: "Id");
@@ -120,10 +121,10 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
                 column: "OptionValueId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CatalogItems_ParentId",
+                name: "IX_CatalogItems_ParentItemId",
                 schema: "catalog",
                 table: "CatalogItems",
-                column: "ParentId");
+                column: "ParentItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OptionValues_OptionId",

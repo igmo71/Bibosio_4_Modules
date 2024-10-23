@@ -18,9 +18,10 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("catalog")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "9.0.0-rc.1.24451.1")
+                .HasAnnotation("ProductVersion", "9.0.0-rc.2.24474.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Bibosio.CatalogModule.Domain.CatalogItem", b =>
                 {
@@ -37,12 +38,12 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("ParentId")
+                    b.Property<Guid?>("ParentItemId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParentItemId");
 
                     b.ToTable("CatalogItems", "catalog");
                 });
@@ -109,9 +110,9 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Bibosio.CatalogModule.Domain.CatalogItem", b =>
                 {
-                    b.HasOne("Bibosio.CatalogModule.Domain.CatalogItem", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
+                    b.HasOne("Bibosio.CatalogModule.Domain.CatalogItem", "ParentItem")
+                        .WithMany("ChildItems")
+                        .HasForeignKey("ParentItemId");
 
                     b.OwnsOne("Bibosio.CatalogModule.Domain.ValueObjects.Sku", "Sku", b1 =>
                         {
@@ -130,7 +131,7 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
                                 .HasForeignKey("CatalogItemId");
                         });
 
-                    b.Navigation("Parent");
+                    b.Navigation("ParentItem");
 
                     b.Navigation("Sku");
                 });
@@ -177,7 +178,7 @@ namespace Bibosio.CatalogModule.Infrastructure.Database.Migrations
                 {
                     b.Navigation("CatalogItemOptions");
 
-                    b.Navigation("Children");
+                    b.Navigation("ChildItems");
                 });
 
             modelBuilder.Entity("Bibosio.CatalogModule.Domain.Option", b =>

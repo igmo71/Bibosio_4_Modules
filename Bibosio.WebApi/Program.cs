@@ -6,6 +6,7 @@ using Bibosio.WeatherForecastModule.Endpoints;
 using Bibosio.WebApi.Test;
 using Microsoft.AspNetCore.Http.Features;
 using Scalar.AspNetCore;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Reflection;
 //using Serilog;
@@ -48,16 +49,18 @@ namespace Bibosio.WebApi
 
             builder.Services.AddHealthChecks();
 
-            builder.Services.AddProblemDetails(options =>
-            {
-                options.CustomizeProblemDetails = context =>
-                {
-                    context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
-                    context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
-                    Activity? activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
-                    context.ProblemDetails.Extensions.TryAdd("traceId", activity?.Id);
-                };
-            });
+            builder.Services.AddProblemDetails(
+                //options =>
+                //{
+                //    options.CustomizeProblemDetails = context =>
+                //    {
+                //        context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+                //        context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
+                //        Activity? activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
+                //        context.ProblemDetails.Extensions.TryAdd("traceId", activity?.Id);
+                //    };
+                //}
+            );
             //builder.Services.AddExceptionHandler<BadRequestExceptionHandler>();
             //builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
             //builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
@@ -80,15 +83,18 @@ namespace Bibosio.WebApi
 
             //app.UseSerilogRequestLogging(options => options.IncludeQueryInRequestPath = true);
 
-            app.UseExceptionHandler(new ExceptionHandlerOptions
-            {
-                StatusCodeSelector = ex => ex switch
-                {
-                    ArgumentException => StatusCodes.Status400BadRequest,
-                    AppNotFoundException => StatusCodes.Status404NotFound,
-                    _ => StatusCodes.Status500InternalServerError
-                }
-            });
+            app.UseExceptionHandler(
+                //new ExceptionHandlerOptions
+                //{
+                //    StatusCodeSelector = ex => ex switch
+                //    {
+                //        ArgumentException => StatusCodes.Status400BadRequest,
+                //        ValidationException => StatusCodes.Status400BadRequest,
+                //        NotFoundException => StatusCodes.Status404NotFound,
+                //        _ => StatusCodes.Status500InternalServerError
+                //    }
+                //}
+            );
             app.UseStatusCodePages();
 
             app.UseHttpsRedirection();

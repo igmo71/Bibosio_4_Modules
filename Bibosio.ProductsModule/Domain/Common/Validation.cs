@@ -1,6 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using Bibosio.Common.Exceptions;
 
 namespace Bibosio.ProductsModule.Domain.Common
 {
@@ -11,7 +13,7 @@ namespace Bibosio.ProductsModule.Domain.Common
         {
             return !string.IsNullOrWhiteSpace(value)
                 ? value
-                : throw new ApplicationException(argumentName);
+                : throw new ValidationException(argumentName);
         }
 
         public static string AssertMatchesRegex(this string value, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
@@ -19,7 +21,7 @@ namespace Bibosio.ProductsModule.Domain.Common
         {
             return Regex.IsMatch(value.AssertNotEmpty(), pattern)
                 ? value
-                : throw new ApplicationException(argumentName);
+                : throw new ValidationException($"Value of {value} not matches pattern");
         }
     }
 }

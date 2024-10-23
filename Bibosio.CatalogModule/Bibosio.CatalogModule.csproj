@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Bibosio.Common\Bibosio.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\Database\Migrations\" />
+  </ItemGroup>
+
 </Project>

@@ -2,21 +2,22 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bibosio.Common.Exceptions
 {
-    public class AppValidationExceptionHandler : IExceptionHandler
+    public class ValidationExceptionHandler : IExceptionHandler
     {
-        private readonly ILogger<AppValidationExceptionHandler> _logger;
+        private readonly ILogger<ValidationExceptionHandler> _logger;
 
-        public AppValidationExceptionHandler(ILogger<AppValidationExceptionHandler> logger)
+        public ValidationExceptionHandler(ILogger<ValidationExceptionHandler> logger)
         {
             _logger = logger;
         }
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            if (exception is not AppValidationException appValidationException)
+            if (exception is not ValidationException appValidationException)
             {
                 return false;
             }

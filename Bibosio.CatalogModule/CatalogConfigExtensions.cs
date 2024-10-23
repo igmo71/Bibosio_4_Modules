@@ -16,8 +16,8 @@ namespace Bibosio.CatalogModule
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext/*Pool*/<CatalogDbContext>(options =>
             {
-                //options.UseNpgsql(connectionString);
-                options.UseSqlite("Data Source=Catalog.db");
+                options.UseNpgsql(connectionString);
+                //options.UseSqlite("Data Source=Catalog.db");
             });
 
             services.AddScoped<CatalogItemCommandService>();
