@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibosio.StorageModule", "Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibosio.SupplyModule", "Bibosio.SupplyModule\Bibosio.SupplyModule.csproj", "{08E599D6-E2A5-4C04-81E1-9DF94DF1A158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibosio.SalesModule", "Bibosio.SalesModule\Bibosio.SalesModule.csproj", "{6214577D-94E5-4BAA-9D6F-2A6336D00D1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{08E599D6-E2A5-4C04-81E1-9DF94DF1A158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08E599D6-E2A5-4C04-81E1-9DF94DF1A158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08E599D6-E2A5-4C04-81E1-9DF94DF1A158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6214577D-94E5-4BAA-9D6F-2A6336D00D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6214577D-94E5-4BAA-9D6F-2A6336D00D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6214577D-94E5-4BAA-9D6F-2A6336D00D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6214577D-94E5-4BAA-9D6F-2A6336D00D1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{CEF7352A-9FA8-40D9-A29D-392F156BDAF3} = {AE34E971-2C46-48A2-B79C-B8BC5AC6EC70}
 		{AE45963C-5513-4C7C-8C96-4696A9E692F1} = {AE34E971-2C46-48A2-B79C-B8BC5AC6EC70}
 		{08E599D6-E2A5-4C04-81E1-9DF94DF1A158} = {AE34E971-2C46-48A2-B79C-B8BC5AC6EC70}
+		{6214577D-94E5-4BAA-9D6F-2A6336D00D1A} = {AE34E971-2C46-48A2-B79C-B8BC5AC6EC70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBC42640-B286-447C-A851-E5DEFCED889B}
