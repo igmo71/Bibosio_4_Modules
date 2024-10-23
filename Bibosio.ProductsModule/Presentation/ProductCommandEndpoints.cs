@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Bibosio.ProductsModule.Endpoints
+namespace Bibosio.ProductsModule.Presentation
 {
     public static class ProductCommandEndpoints
     {

@@ -1,6 +1,6 @@
 ﻿using Bibosio.Interfaces;
 using Bibosio.ProductsModule.Application;
-using Bibosio.ProductsModule.Endpoints;
+using Bibosio.ProductsModule.Presentation;
 using Bibosio.ProductsModule.Infrastructure.Data;
 using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
 using Bibosio.ProductsModule.Infrastructure.EventBus.Kafka;

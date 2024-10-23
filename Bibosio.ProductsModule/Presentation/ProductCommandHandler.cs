@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bibosio.ProductsModule.Endpoints
+namespace Bibosio.ProductsModule.Presentation
 {
     internal class ProductCommandHandler
     {
