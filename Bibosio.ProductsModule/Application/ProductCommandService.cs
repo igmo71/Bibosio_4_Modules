@@ -3,7 +3,7 @@ using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Domain.ValueObjects;
 using Bibosio.ProductsModule.Dto;
 using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
-using Bibosio.ProductsModule.Interfaces;
+using Bibosio.ProductsModule.Abstractions;
 using Serilog;
 using SerilogTracing;
 

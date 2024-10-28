@@ -1,5 +1,5 @@
 ﻿using Bibosio.ProductsModule.Domain;
-using Bibosio.ProductsModule.Interfaces;
+using Bibosio.ProductsModule.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bibosio.ProductsModule.Infrastructure.Database

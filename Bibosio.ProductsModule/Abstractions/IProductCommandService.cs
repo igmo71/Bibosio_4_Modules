@@ -1,7 +1,7 @@
 ﻿using Bibosio.Interfaces;
 using Bibosio.ProductsModule.Dto;
 
-namespace Bibosio.ProductsModule.Interfaces
+namespace Bibosio.ProductsModule.Abstractions
 {
     internal interface IProductCommandService : ICommandService
     {

@@ -1,5 +1,5 @@
 ﻿using Bibosio.CatalogModule.Domain;
-using Bibosio.CatalogModule.Interfaces;
+using Bibosio.CatalogModule.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 

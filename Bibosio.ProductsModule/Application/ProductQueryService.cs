@@ -1,6 +1,6 @@
 ﻿using Bibosio.Common;
 using Bibosio.ProductsModule.Dto;
-using Bibosio.ProductsModule.Interfaces;
+using Bibosio.ProductsModule.Abstractions;
 using Microsoft.Extensions.Logging;
 
 namespace Bibosio.ProductsModule.Application

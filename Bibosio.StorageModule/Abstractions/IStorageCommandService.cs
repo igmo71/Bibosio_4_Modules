@@ -1,4 +1,4 @@
-﻿namespace Bibosio.StorageModule.Interfaces
+﻿namespace Bibosio.StorageModule.Abstractions
 {
     internal interface IStorageCommandService
     {

@@ -1,6 +1,6 @@
 ﻿using Bibosio.CatalogModule.Common;
 using Bibosio.CatalogModule.Domain;
-using Bibosio.CatalogModule.Interfaces;
+using Bibosio.CatalogModule.Abstractions;
 using Bibosio.Common.OpenTelemetry;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;

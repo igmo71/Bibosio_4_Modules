@@ -1,5 +1,5 @@
 ﻿using Bibosio.ProductsModule.Dto;
-using Bibosio.ProductsModule.Interfaces;
+using Bibosio.ProductsModule.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;

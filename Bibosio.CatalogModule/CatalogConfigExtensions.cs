@@ -1,6 +1,6 @@
 ﻿using Bibosio.CatalogModule.Application;
 using Bibosio.CatalogModule.Infrastructure.Database;
-using Bibosio.CatalogModule.Interfaces;
+using Bibosio.CatalogModule.Abstractions;
 using Bibosio.CatalogModule.Presentation;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;

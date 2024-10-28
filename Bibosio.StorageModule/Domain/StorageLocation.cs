@@ -5,10 +5,8 @@ namespace Bibosio.StorageModule.Domain
     internal class StorageLocation : AppEntity
     {
         public required string Code { get; set; }
-        public LocationType? LocationType { get; set; }
-
-        public double MaxCapacity { get; set; }
-        public double CurrentCapacity { get; set; }
+        public StorageLocationType? LocationType { get; set; }
+        public StorageLocationCapacity? LocationCapacity { get; set; }
 
         public Guid? ParentLocationId { get; set; }
         public StorageLocation? ParentLocation { get; set; }

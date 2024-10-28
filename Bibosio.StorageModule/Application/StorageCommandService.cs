@@ -1,4 +1,4 @@
-﻿using Bibosio.StorageModule.Interfaces;
+﻿using Bibosio.StorageModule.Abstractions;
 
 namespace Bibosio.StorageModule.Application
 {
