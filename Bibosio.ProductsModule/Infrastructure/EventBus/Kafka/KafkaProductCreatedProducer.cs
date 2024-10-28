@@ -1,4 +1,4 @@
-﻿using Bibosio.Interfaces;
+﻿using Bibosio.Abstractions;
 using Bibosio.ProductsModule.Infrastructure.EventBus.Events;
 using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;

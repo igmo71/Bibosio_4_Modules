@@ -1,4 +1,4 @@
-﻿using Bibosio.Interfaces;
+﻿using Bibosio.Abstractions;
 using Bibosio.ProductsModule.Domain;
 using Bibosio.ProductsModule.Domain.ValueObjects;
 using Bibosio.ProductsModule.Dto;

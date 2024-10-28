@@ -1,4 +1,4 @@
-﻿using Bibosio.Common;
+﻿using Bibosio.Abstractions;
 
 namespace Bibosio.CatalogModule.Domain
 {

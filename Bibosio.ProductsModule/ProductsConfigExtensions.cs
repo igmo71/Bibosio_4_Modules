@@ -1,4 +1,4 @@
-﻿using Bibosio.Interfaces;
+﻿using Bibosio.Abstractions;
 using Bibosio.ProductsModule.Application;
 using Bibosio.ProductsModule.Infrastructure.Database;
 using Bibosio.ProductsModule.Infrastructure.EventBus.Events;

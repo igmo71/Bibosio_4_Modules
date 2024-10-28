@@ -1,4 +1,4 @@
-﻿using Bibosio.Interfaces;
+﻿using Bibosio.Abstractions;
 
 namespace Bibosio.ProductsModule.Infrastructure.EventBus.Events
 {

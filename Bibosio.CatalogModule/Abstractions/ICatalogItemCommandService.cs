@@ -1,5 +1,5 @@
-﻿using Bibosio.CatalogModule.Domain;
-using Bibosio.Interfaces;
+﻿using Bibosio.Abstractions;
+using Bibosio.CatalogModule.Domain;
 
 namespace Bibosio.CatalogModule.Abstractions
 {

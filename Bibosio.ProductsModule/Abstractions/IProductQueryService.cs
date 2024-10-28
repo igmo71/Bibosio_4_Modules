@@ -1,4 +1,4 @@
-﻿using Bibosio.Interfaces;
+﻿using Bibosio.Abstractions;
 using Bibosio.ProductsModule.Dto;
 
 namespace Bibosio.ProductsModule.Abstractions

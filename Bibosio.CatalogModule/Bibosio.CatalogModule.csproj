@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Bibosio.Abstractions\Bibosio.Abstractions.csproj" />
     <ProjectReference Include="..\Bibosio.Common\Bibosio.Common.csproj" />
   </ItemGroup>
 
