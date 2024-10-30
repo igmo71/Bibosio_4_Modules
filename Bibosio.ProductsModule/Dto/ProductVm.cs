@@ -4,9 +4,9 @@ namespace Bibosio.ProductsModule.Dto
 {
     internal record ProductVm(string Id, string Sku)
     {
-        internal static ProductVm From(Product Product)
+        internal static ProductVm From(Product product)
         {
-            return new ProductVm(Product.Id.ToString(), Product.Sku.Value);
+            return new ProductVm(product.Id.ToString(), product.Sku.Value);
         }
     }
 }

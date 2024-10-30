@@ -20,7 +20,7 @@ namespace Bibosio.ProductsModule.Application
         {
             var products = await _repository.GetAllAsync(skip, top);
 
-            var result = products.Select(e => ProductVm.From(e)).ToArray();
+            var result = products.Select(product => ProductVm.From(product)).ToArray();
 
             _logger.CouldNotOpenSocket(LogLevel.Error, "localhost");
 
